@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="localisation_text_size">16sp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="font_size_location">36sp</dimen>
+</resources>
