@@ -5,7 +5,10 @@
       <map>
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.3015625" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.3015625" />
+        <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/ic_baseline_wb_sunny_24.xml" value="0.321875" />
+        <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/recycler_view_items_border.xml" value="0.321875" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/recycler_item_current_info.xml" value="0.33" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/menu/top_app_bar.xml" value="0.1890625" />
       </map>
     </option>

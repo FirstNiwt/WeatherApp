@@ -3,4 +3,6 @@
     <dimen name="localisation_text_size">16sp</dimen>
     <dimen name="margin_8">8dp</dimen>
     <dimen name="font_size_location">36sp</dimen>
+    <dimen name="current_time_font_size">36sp</dimen>
+    <dimen name="current_temperature_font_size">48sp</dimen>
 </resources>
