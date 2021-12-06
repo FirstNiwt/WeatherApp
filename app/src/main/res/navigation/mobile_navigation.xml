@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/homeScreenFragment">
+    <fragment
+        android:id="@+id/currentWeatherDetailedFragment"
+        android:name="com.example.weatherapp.ui.weather.current.CurrentWeatherDetailedFragment"
+        android:label="currentWeatherDetailedFragment"
+        tools:layout="@layout/current_weather_detailed_fragment" />
+    <fragment
+        android:id="@+id/weeklyListWeatherFragment"
+        android:name="com.example.weatherapp.ui.weather.weekly.WeeklyListWeatherFragment"
+        android:label="WeeklyListWeatherFragment" />
+    <fragment
+        android:id="@+id/weeklyDetailWeatherFragment"
+        android:name="com.example.weatherapp.ui.weather.weekly.detailed.WeeklyDetailWeatherFragment"
+        android:label="weekly_detail_weather_fragment"
+        tools:layout="@layout/weekly_detail_weather_fragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.weatherapp.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/alertsFragment"
+        android:name="com.example.weatherapp.ui.alerts.AlertsFragment"
+        android:label="fragment_alerts"
+        tools:layout="@layout/fragment_alerts" />
+    <fragment
+        android:id="@+id/homeScreenFragment"
+        android:name="com.example.weatherapp.ui.home.HomeScreenFragment"
+        android:label="fragment_home_screen"
+        tools:layout="@layout/fragment_home_screen" />
+</navigation>

@@ -2,14 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
     <item
-
         android:id="@+id/auto_localisation"
         android:icon="@drawable/ic_baseline_location_on_24"
         android:title="@string/localisation"
         android:contentDescription="@string/auto_localisation_desc"
         app:showAsAction="always"/>
-
 
 </menu>

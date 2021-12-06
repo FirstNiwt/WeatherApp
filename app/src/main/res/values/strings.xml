@@ -8,4 +8,16 @@
     <string name="current_date">pon. 31 gru 2021</string>
     <string name="current_temperature">12°C</string>
     <string name="current_weather_short_description">Słonecznie</string>
+    <string name="today">Today</string>
+    <string name="week">Week</string>
+    <string name="notification">Notifications</string>
+    <string name="settings">Settings</string>
+    <string name="alarm">Alerts</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="monthly">Monthly</string>
+    <string name="weekly">Weekly</string>
+    <string name="alerts">alerts</string>
+    <string name="nothingselected">nothingSelected</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>
