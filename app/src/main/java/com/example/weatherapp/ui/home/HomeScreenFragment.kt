@@ -1,19 +1,14 @@
 package com.example.weatherapp.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.get
-import com.example.weatherapp.R
-import com.example.weatherapp.data.Main
-import com.example.weatherapp.databinding.ActivityMainBinding
 import com.example.weatherapp.databinding.FragmentHomeScreenBinding
-import com.example.weatherapp.ui.MainActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +23,7 @@ private const val ARG_PARAM2 = "param2"
 class HomeScreenFragment : Fragment() {
 
 
+    private var paused:Boolean = false
     private var _binding: FragmentHomeScreenBinding? = null
     private val binding get() = _binding!!
 
@@ -57,11 +53,7 @@ class HomeScreenFragment : Fragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        //Toast.makeText(context,"wracam",Toast.LENGTH_SHORT).show()
 
-        super.onResume()
-    }
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -81,6 +73,10 @@ class HomeScreenFragment : Fragment() {
                 }
             }
     }
+
+
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

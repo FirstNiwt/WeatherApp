@@ -20,6 +20,7 @@ class CurrentWeatherDetailedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.current_weather_detailed_fragment, container, false)
     }
 

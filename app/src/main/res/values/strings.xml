@@ -19,5 +19,6 @@
     <string name="weekly">Weekly</string>
     <string name="alerts">alerts</string>
     <string name="nothingselected">nothingSelected</string>
+    <string name="home">Home</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

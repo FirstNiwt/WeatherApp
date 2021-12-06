@@ -2,10 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/inviNothingSelceted"
-        android:icon = "@drawable/ic_baseline_today_24"
-        android:title="@string/nothingselected"
-        android:visible="false"/>
+        android:id="@+id/homeScreenFragment"
+        android:icon = "@drawable/ic_baseline_home_24"
+        android:title="@string/home" />
 
     <item
         android:id="@+id/currentWeatherDetailedFragment"

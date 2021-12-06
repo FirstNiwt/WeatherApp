@@ -1,6 +1,7 @@
-package com.example.weatherapp.data
+package com.example.weatherapp.data.response
 
-data class CurrentWeatherData(
+
+data class CurrentWeatherResponse(
     val base: String,
     val clouds: Clouds,
     val cod: Int,
