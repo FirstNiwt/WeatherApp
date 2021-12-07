@@ -22,8 +22,6 @@ private const val ARG_PARAM2 = "param2"
  */
 class HomeScreenFragment : Fragment() {
 
-
-    private var paused:Boolean = false
     private var _binding: FragmentHomeScreenBinding? = null
     private val binding get() = _binding!!
 

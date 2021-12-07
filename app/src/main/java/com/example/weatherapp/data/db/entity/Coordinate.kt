@@ -1,9 +1,9 @@
-package com.example.weatherapp.data.response
+package com.example.weatherapp.data.db.entity
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Coord(
+data class Coordinate(
     val lat: Double,
     val lon: Double
 )
