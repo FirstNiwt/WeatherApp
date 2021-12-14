@@ -9,8 +9,9 @@ import com.example.weatherapp.internal.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
+import javax.inject.Inject
 
-class ConnectivityInterceptorImpl(context: Context) : ConnectivityInterceptor
+class ConnectivityInterceptorImpl @Inject constructor(context: Context) : ConnectivityInterceptor
 {
     private val appContext = context.applicationContext
 

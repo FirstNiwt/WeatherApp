@@ -1,12 +1,12 @@
 package com.example.weatherapp.data.db.entity
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.example.weatherapp.data.db.entity.*
+import androidx.room.*
+import com.example.weatherapp.data.db.Converters
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 const val CURRENT_WEATHER_ID = 0
+
 
 @Entity(tableName = "current_weather")
 data class CurrentWeatherEntry(
@@ -26,11 +26,16 @@ data class CurrentWeatherEntry(
     val sys: Sys,
     val timezone: Int,
     val visibility: Int,
-    @Embedded(prefix = "weather_")
-    val weather: List<Weather>,  //TODO add TypeConverter
+    val weather: List<Weather>,
     @Embedded(prefix = "wind_")
     val wind: Wind
 ) {
+
     @PrimaryKey(autoGenerate = false)
     var keyId: Int = CURRENT_WEATHER_ID
+
+    constructor() :this("", Clouds(0), 0, Coordinate(0.0,0.0), 0, 0,
+        Main(0.0,0,0,0.0,0.0,0.0),
+        "",Sys("",0,0.0,0,0,0),0,
+        0, mutableListOf(Weather("")),Wind(0,0.0))
 }
