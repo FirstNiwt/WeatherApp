@@ -2,6 +2,8 @@ package com.example.weatherapp.data.db
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
+import com.example.weatherapp.data.db.entity.Daily
+import com.example.weatherapp.data.db.entity.Hourly
 import com.example.weatherapp.data.db.entity.Weather
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -27,5 +29,38 @@ class Converters {
 
         return Gson().fromJson(weatherString,listType)
     }
+
+    @TypeConverter
+    fun fromListDailyToString(dailyList: List<Daily>):String
+    {
+        return Gson().toJson(dailyList)
+    }
+
+    @TypeConverter
+    fun fromStringToDailyList(weatherString: String): List<Daily>
+    {
+
+        val listType: Type = object : TypeToken<List<Daily>>() {}.type
+
+        return Gson().fromJson(weatherString,listType)
+    }
+
+
+    @TypeConverter
+    fun fromListHourlyToString(hourlyList: List<Hourly>):String
+    {
+        return Gson().toJson(hourlyList)
+    }
+
+    @TypeConverter
+    fun fromStringToHourlyList(weatherString: String): List<Hourly>
+    {
+
+        val listType: Type = object : TypeToken<List<Hourly>>() {}.type
+
+        return Gson().fromJson(weatherString,listType)
+    }
+
+
 
 }

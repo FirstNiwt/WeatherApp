@@ -56,15 +56,6 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
 
        bindUI()
 
-        //val apiService = OpenWeatherApiService(ConnectivityInterceptorImpl(this.context!!))
-        //val weatherNetworkDataSource = WeatherNetworkDataSourceImpl(apiService)
-       // weatherNetworkDataSource.fetchedCurrentWeather.observe(this, {
-       //     binding.textView.text = it.toString()
-       // })
-       // GlobalScope.launch(Dispatchers.Main) {
-       //     forecastRepository.getCurrentWeather("metric")
-       // }
-        // }
     }
 
     private fun bindUI() = launch{
@@ -76,7 +67,7 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
                 Toast.makeText(context,"Not initialized",Toast.LENGTH_SHORT).show()
                 return@Observer
             }
-            binding.textView.text = it.toString()
+            binding.textViewLoading.text = it.toString()
 
             })
 

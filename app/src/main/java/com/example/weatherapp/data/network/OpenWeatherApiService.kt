@@ -31,6 +31,7 @@ interface OpenWeatherApiService {
 
     ): Deferred<CurrentWeatherEntry>
 
+
     companion object {
         operator fun invoke(
             connectivityInterceptor:ConnectivityInterceptor
