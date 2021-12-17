@@ -24,7 +24,7 @@ data class FutureWeatherEntry(
 
     constructor() :this(mutableListOf(Daily(0,0,0,0.0,0,0.0,
              0.0,0,0,mutableListOf(Weather("")),0.0)),
-             mutableListOf(Hourly(0,0,0,0,0,0.0,
+             mutableListOf(Hourly(0,0,0,0.0,0,0.0,
              mutableListOf(Weather("")),0.0)),0.0,0.0,"",0)
 
 }

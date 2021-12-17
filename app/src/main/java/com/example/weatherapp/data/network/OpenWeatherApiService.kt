@@ -1,6 +1,7 @@
 package com.example.weatherapp.data.network
 
 import com.example.weatherapp.data.db.entity.CurrentWeatherEntry
+import com.example.weatherapp.data.db.entity.FutureWeatherEntry
 import com.example.weatherapp.data.network.ConnectivityInterceptor
 import com.example.weatherapp.data.network.ConnectivityInterceptorImpl
 
@@ -31,6 +32,15 @@ interface OpenWeatherApiService {
 
     ): Deferred<CurrentWeatherEntry>
 
+    @GET("onecall")
+    fun getFutureWeatherData(
+        @Query("lat") positionLat: Double = 50.2813 ,
+        @Query("lon") positionLon: Double = 19.56503 ,
+        @Query("exclude") excludeFromCall: String = "minutely,alerts",
+        @Query("units") units: String = "metric",
+        @Query("lang") languageOfResponse: String = "en"
+
+    ): Deferred<FutureWeatherEntry>
 
     companion object {
         operator fun invoke(

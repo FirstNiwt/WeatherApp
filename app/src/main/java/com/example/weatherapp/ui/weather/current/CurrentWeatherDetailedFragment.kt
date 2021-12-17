@@ -60,17 +60,27 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
 
     private fun bindUI() = launch{
 
-        val weather = viewModel.currentWeather.await()
+        //val currentWeather = viewModel.currentWeather.await()
+        val futureWeather = viewModel.futureWeather.await()
 
-        weather.observe(this@CurrentWeatherDetailedFragment, Observer {
-            if(it == null) {
+        //currentWeather.observe(this@CurrentWeatherDetailedFragment, Observer {
+        //    if(it == null) {
+        //        Toast.makeText(context,"Not initialized",Toast.LENGTH_SHORT).show()
+        //        return@Observer
+        //    }
+        //    binding.textViewLoading.text = it.toString()
+//
+        //    })
+
+        futureWeather.observe(this@CurrentWeatherDetailedFragment, Observer{
+            if(it == null)
+            {
                 Toast.makeText(context,"Not initialized",Toast.LENGTH_SHORT).show()
                 return@Observer
             }
             binding.textViewLoading.text = it.toString()
-
-            })
-
+        })
+//
     }
     override fun onDestroyView() {
         super.onDestroyView()

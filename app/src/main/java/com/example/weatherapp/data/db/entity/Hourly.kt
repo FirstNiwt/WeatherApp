@@ -7,7 +7,7 @@ data class Hourly(
     val clouds: Int,
     val dt: Int,
     val humidity: Int,
-    val pop: Int,
+    val pop: Double,
     val pressure: Int,
     val temp: Double,
     val weather: List<Weather>,

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.weatherapp.data.CurrentWeatherDao
+import com.example.weatherapp.data.FutureWeatherDao
 import com.example.weatherapp.data.db.ForecastDatabase
 import com.example.weatherapp.data.network.*
 import com.example.weatherapp.data.repository.ForecastRepository
@@ -16,6 +17,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.Future
 import javax.inject.Singleton
 
 
@@ -34,6 +36,10 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideFutureWeatherDao(db: ForecastDatabase) = db.getFutureWeatherDao()
+
+    @Provides
+    @Singleton
     fun providesWeatherApiService(connectivityInterceptor:
     ConnectivityInterceptor) = OpenWeatherApiService(connectivityInterceptor)
 
@@ -44,8 +50,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideForecastRepositoryImpl(currentWeatherDao: CurrentWeatherDao,weatherNetworkDataSource:
-    WeatherNetworkDataSource) = ForecastRepositoryImpl(currentWeatherDao, weatherNetworkDataSource)
+    fun provideForecastRepositoryImpl(currentWeatherDao: CurrentWeatherDao,futureWeatherDao:FutureWeatherDao,weatherNetworkDataSource:
+    WeatherNetworkDataSource) = ForecastRepositoryImpl(currentWeatherDao,futureWeatherDao, weatherNetworkDataSource)
 
     @Provides
     @Singleton
