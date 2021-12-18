@@ -2,12 +2,12 @@
     <string name="app_name">WeatherApp</string>
     <string name="auto_localisation_desc">automatic localisation</string>
     <string name="localisation">localisation</string>
-    <string name="app_title">Olkusz, Polska</string>
+    <string name="app_title">Olkusz, Poland</string>
     <string name="current_weather_decription">current weather decription</string>
     <string name="current_time">00.00</string>
     <string name="current_date">pon. 31 gru 2021</string>
     <string name="current_temperature">12°C</string>
-    <string name="current_weather_short_description">Słonecznie</string>
+    <string name="current_weather_short_description">Sunny</string>
     <string name="today">Today</string>
     <string name="week">Week</string>
     <string name="notification">Notifications</string>
@@ -20,5 +20,9 @@
     <string name="alerts">alerts</string>
     <string name="nothingselected">nothingSelected</string>
     <string name="home">Home</string>
+    <string name="humidity_place_holder">%1$d\%%</string>
+    <string name="cloudiness_place_holder">%1$d%%</string>
+    <string name="temperature_place_holder">%1$d°</string>
+    <string name="wind_speed_place_holder_metric">%1$d km/h</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

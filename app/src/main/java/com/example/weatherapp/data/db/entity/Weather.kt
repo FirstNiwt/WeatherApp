@@ -5,5 +5,6 @@ import androidx.room.Embedded
 
 
 data class Weather(
-    val description: String
+    val description: String,
+    val id: Int
 )

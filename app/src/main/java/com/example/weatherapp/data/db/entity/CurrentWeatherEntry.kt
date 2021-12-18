@@ -37,5 +37,5 @@ data class CurrentWeatherEntry(
     constructor() :this("", Clouds(0), 0, Coordinate(0.0,0.0), 0, 0,
         Main(0.0,0,0,0.0,0.0,0.0),
         "",Sys("",0,0.0,0,0,0),0,
-        0, mutableListOf(Weather("")),Wind(0,0.0))
+        0, mutableListOf(Weather("",0)),Wind(0,0.0))
 }

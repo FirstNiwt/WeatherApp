@@ -27,7 +27,9 @@
             app:menu="@menu/top_app_bar"
             app:navigationIcon="@drawable/ic_baseline_search_24"
             app:title="@string/app_title"
-            app:titleCentered="true" />
+            app:titleCentered="true"
+            app:subtitleCentered="true"
+            />
 
     </com.google.android.material.appbar.AppBarLayout>
 

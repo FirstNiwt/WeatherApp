@@ -27,8 +27,7 @@ class ForecastRepositoryImpl @Inject constructor(
                 preserveCurrentWeather(newCurrentWeather)
             }
 
-            fetchedFutureWeather.observeForever{
-                newFutureWeather ->
+            fetchedFutureWeather.observeForever{ newFutureWeather ->
                 preserveFutureWeather(newFutureWeather)
             }
 
@@ -52,7 +51,7 @@ class ForecastRepositoryImpl @Inject constructor(
 
     private suspend fun initWeatherData() {
 
-            //fetchCurrentWeather()
+            fetchCurrentWeather()
             fetchFutureWeather()
     }
 
@@ -64,11 +63,11 @@ class ForecastRepositoryImpl @Inject constructor(
     }
 
     private suspend fun fetchCurrentWeather(){
-        weatherNetworkDataSource.fetchCurrentData("Olkusz","metric","en")
+        weatherNetworkDataSource.fetchCurrentData("Olkusz","metric","en") //TODO get device location
     }
 
     private suspend fun fetchFutureWeather(){
-        weatherNetworkDataSource.fetchFutureData(50.2813,19.56503,"minutely,alerts","metric","en")
+        weatherNetworkDataSource.fetchFutureData(50.2813,19.56503,"minutely,alerts","metric","en")  //TODO get device location
     }
 
     private fun preserveCurrentWeather(currentWeather:CurrentWeatherEntry){
