@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    >
+<layout xmlns:tools="http://schemas.android.com/tools">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -14,7 +13,7 @@
         android:layout_height="22dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="@string/current_date"
+        tools:text="pon. 31 gru 2021"
         android:textColor="@color/font_color"
         app:layout_constraintEnd_toStartOf="@+id/current_weather_image"
         app:layout_constraintHorizontal_bias="0.0"
@@ -27,7 +26,7 @@
         android:layout_height="59dp"
         android:layout_marginBottom="8dp"
         android:gravity="center|center_horizontal"
-        android:text="@string/current_time"
+        tools:text="00.00"
         android:textColor="@color/font_color"
         android:textSize="@dimen/current_time_font_size"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +39,6 @@
         android:layout_width="150dp"
         android:layout_height="74dp"
         android:layout_marginTop="4dp"
-        android:contentDescription="@string/current_weather_decription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/current_weather_short_description"
@@ -54,7 +52,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="128dp"
         android:gravity="center"
-        android:text="@string/current_weather_short_description"
+        tools:text="Sunny"
         android:textColor="@color/font_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +63,7 @@
         android:layout_width="113dp"
         android:layout_height="114dp"
         android:gravity="center"
-        android:text="@string/current_temperature"
+        tools:text="12°C"
         android:textColor="@color/font_color"
         android:textSize="@dimen/current_temperature_font_size"
         app:layout_constraintBottom_toBottomOf="parent"

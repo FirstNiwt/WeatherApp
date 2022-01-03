@@ -4,9 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CBF6F2"
+    android:background="@drawable/background4"
     tools:context=".ui.weather.current.CurrentWeatherDetailedFragment">
 
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_loading_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="progressBar,textView_loading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginEnd="8dp" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -22,11 +31,14 @@
 
     <TextView
         android:id="@+id/textView_loading"
-        android:layout_width="408dp"
-        android:layout_height="313dp"
-        android:text="Wczytywanie danych"
+        android:layout_width="168dp"
+        android:layout_height="19dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/current_weather_detailed_loading_main"
         android:textAlignment="center"
+        android:textColor="@color/font_color"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
@@ -34,8 +46,9 @@
         android:id="@+id/imageView_weather_type"
         android:layout_width="285dp"
         android:layout_height="245dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/current_weather_detailed_main_image_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_cloudy" />
@@ -45,11 +58,12 @@
         android:layout_width="144dp"
         android:layout_height="116dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="13dp"
+        android:fontFamily="@font/roboto"
         android:gravity="center_vertical"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/font_color"
         android:textSize="@dimen/temperature_text_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/imageView_weather_type"
@@ -61,37 +75,41 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_hourly"
-        android:layout_width="394dp"
-        android:layout_height="241dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_hourly_forecast" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_loading"
+        app:layout_constraintVertical_bias="0.797" />
 
     <TextView
         android:id="@+id/textView_hourly_forecast"
-        android:layout_width="394dp"
+        android:layout_width="390dp"
         android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/roboto"
         android:gravity="center_vertical"
-        android:textAlignment="center"
-        android:textColor="@color/black"
+        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
+        android:text="@string/hourly_forecast_title"
+        android:textAlignment="viewStart"
+        android:textColor="@color/font_color"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_weather_type"
-        tools:ignore="RtlCompat"
-        tools:text="HOURLY FORECAST" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView_hourly"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView_hourly"
+        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView_hourly"
+        app:layout_constraintTop_toBottomOf="@+id/textView_loading"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="RtlCompat" />
 
     <ImageView
         android:id="@+id/imageView_wind"
@@ -99,6 +117,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/current_weather_detailed_wind_image_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_temperature"
         tools:src="@drawable/ic_wind" />
@@ -110,9 +129,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="@font/roboto"
         android:gravity="center_vertical"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/font_color"
         android:textSize="@dimen/small_info_text_size"
         app:layout_constraintEnd_toStartOf="@+id/imageView_weather_type"
         app:layout_constraintHorizontal_bias="1.0"
@@ -127,6 +147,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/current_weather_detailed_humidity_image_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_wind"
         tools:src="@drawable/ic_humidity" />
@@ -137,9 +158,10 @@
         android:layout_height="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="@font/roboto"
         android:gravity="center_vertical"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/font_color"
         android:textSize="@dimen/small_info_text_size"
         app:layout_constraintEnd_toStartOf="@+id/imageView_weather_type"
         app:layout_constraintTop_toBottomOf="@+id/textView_wind_speed"
@@ -152,6 +174,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/current_weather_detailed_cloud_image_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_humidity"
         tools:src="@drawable/ic_cloud" />
@@ -162,38 +185,69 @@
         android:layout_height="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="@font/roboto"
         android:gravity="center_vertical"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/font_color"
         android:textSize="@dimen/small_info_text_size"
         app:layout_constraintEnd_toStartOf="@+id/imageView_weather_type"
         app:layout_constraintTop_toBottomOf="@+id/textView_humidity"
         tools:ignore="RtlCompat"
         tools:text="11%" />
 
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_loading_hourly_forecast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:constraint_referenced_ids="progressBar_hourly_loading,textView_hourly_loading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginEnd="8dp" />
+
     <ProgressBar
-        android:id="@+id/progressBar_hourlyloading"
+        android:id="@+id/progressBar_hourly_loading"
         style="?android:attr/progressBarStyle"
         android:layout_width="55dp"
         android:layout_height="55dp"
+        android:layout_marginBottom="20dp"
         android:indeterminate="true"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerView_hourly"
         app:layout_constraintEnd_toEndOf="@+id/recyclerView_hourly"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="@+id/recyclerView_hourly"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar"
-        app:layout_constraintVertical_bias="0.345" />
+        app:layout_constraintTop_toTopOf="@+id/recyclerView_hourly"
+        app:layout_constraintVertical_bias="0.505" />
 
     <TextView
-        android:id="@+id/textView_hourlyLoading"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView_hourly_loading"
+        android:layout_width="55dp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="@string/hourly_loading_text"
         android:textAlignment="center"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/progressBar_hourlyloading"
-        app:layout_constraintStart_toStartOf="@+id/progressBar_hourlyloading"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar_hourlyloading"
-        tools:text="Wczytywanie danych" />
+        android:textColor="@color/font_color"
+        app:layout_constraintEnd_toEndOf="@+id/progressBar_hourly_loading"
+        app:layout_constraintStart_toStartOf="@+id/progressBar_hourly_loading"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar_hourly_loading" />
+
+    <TextView
+        android:id="@+id/textView_weatherdescription"
+        android:layout_width="285dp"
+        android:layout_height="37dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_horizontal|center_vertical"
+        android:textAlignment="center"
+        android:textColor="@color/font_color"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_weather_type"
+        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintStart_toStartOf="@+id/imageView_weather_type"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_weather_type"
+        app:layout_constraintVertical_bias="0.005"
+        tools:text="Cloudy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,8 +4,7 @@ import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.Window
+
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -18,20 +17,27 @@ import java.lang.Exception
 import java.lang.RuntimeException
 import java.lang.reflect.Method
 import android.R.menu
-
-import android.R
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.res.Resources
+import android.os.Handler
+import android.util.AttributeSet
+import android.view.*
 
 import androidx.appcompat.view.menu.MenuBuilder
-
-
-
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import com.bumptech.glide.load.engine.Resource
+import com.example.weatherapp.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.checkerframework.checker.units.qual.m
 
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +47,17 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
 
+        val navView:BottomNavigationView = binding.bottomNav
+        navView.setBackgroundColor(ResourcesCompat.getColor(resources,R.color.colorPrimaryDark,theme))
+
+
+
         navController = navHostFragment.navController
 
         binding.bottomNav.setupWithNavController(navController)
 
         NavigationUI.setupActionBarWithNavController(this,navController)
+
 
 
 
@@ -57,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         if (menu is MenuBuilder) {
             menu.setOptionalIconsVisible(true)
         }
+
         menuInflater.inflate(com.example.weatherapp.R.menu.top_app_bar, menu)
         return super.onCreateOptionsMenu(menu)
     }
@@ -64,6 +77,8 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController,null)
     }
+
+
 
 
 }

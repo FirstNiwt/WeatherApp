@@ -8,4 +8,5 @@
     <dimen name="temperature_text_size">64sp</dimen>
     <dimen name="weather_description_size">24sp</dimen>
     <dimen name="small_info_text_size">12sp</dimen>
+    <dimen name="weatherDescription">22sp</dimen>
 </resources>

@@ -2,14 +2,15 @@ package com.example.weatherapp.ui.weather.current
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
+import com.example.weatherapp.data.db.entity.Hourly
 import com.example.weatherapp.data.network.OpenWeatherApiService
 import com.example.weatherapp.data.network.WeatherNetworkDataSourceImpl
 import com.example.weatherapp.data.repository.ForecastRepository
@@ -28,10 +29,11 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
     @Inject lateinit var weatherNetworkDataSource:WeatherNetworkDataSourceImpl
     @Inject lateinit var viewModelFactory:CurrentWeatherViewModelFactory
     @Inject lateinit var forecastRepository: ForecastRepository
-
+    private lateinit var hourlyAdapter: HourlyWeatherAdapter
 
     private var _binding: CurrentWeatherDetailedFragmentBinding? = null
     private val binding get() = _binding!!
+    private var linearLayoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
 
     companion object {
         fun newInstance() = CurrentWeatherDetailedFragment()
@@ -42,15 +44,14 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = CurrentWeatherDetailedFragmentBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(CurrentWeatherDetailedViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)[CurrentWeatherDetailedViewModel::class.java]
 
        bindUI()
 
@@ -69,14 +70,14 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
 
             }
 
-            binding.progressBar.visibility = View.GONE    //TODO CREATE VIEW GROUP FOR THIS
-            binding.textViewLoading.visibility = View.GONE
+
+            binding.groupLoadingCurrent.visibility = View.GONE
 
 
-
-            showLocation("Olkusz")
+            showLocation("Olkusz")// TODO HARDCODED use phone location
             showDate()
 
+            setWeatherDescription(0)
             setWeatherImage(it.weather[0].id)
             setTemperature(it.main.temp)
 
@@ -90,11 +91,11 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
             showWindImage()
             setWindSpeed(it.wind.speed,"") //TODO get units from settings
 
-            showHourlyForecastText()
 
-            binding.progressBarHourlyloading.visibility = View.VISIBLE
-            binding.textViewHourlyLoading.text = "Wczytywanie Danych" //TODO HARD CODED
-            binding.textViewHourlyLoading.visibility = View.VISIBLE
+
+
+
+
 
 
             })
@@ -105,12 +106,19 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
                 Toast.makeText(context,"Not initialized",Toast.LENGTH_SHORT).show()
                 return@Observer
             }
-            Log.e("X",it.timezone)
-            binding.progressBarHourlyloading.visibility = View.GONE  //TODO CREATE VIEW GROUP FOR THIS
-            //binding.textViewHourlyLoading.visibility = View.GONE
-            binding.textViewHourlyLoading.text = it.toString()
 
 
+            //binding.textViewHourlyLoading.text = it.toString()
+            binding.recyclerViewHourly.layoutManager = linearLayoutManager
+
+            val hourlyWeatherMutableList:MutableList<Hourly> = it.hourly.toMutableList()
+
+            hourlyWeatherMutableList.removeFirst()
+
+
+            hourlyAdapter = HourlyWeatherAdapter(hourlyWeatherMutableList)
+            binding.recyclerViewHourly.adapter = hourlyAdapter
+            binding.textViewHourlyForecast.visibility = View.VISIBLE
         })
 
     }
@@ -128,7 +136,6 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
             800 -> binding.imageViewWeatherType.setImageResource(R.drawable.ic_clear_sun)
             801 -> binding.imageViewWeatherType.setImageResource(R.drawable.ic_sunny_few_clouds)
             in 802..804 -> binding.imageViewWeatherType.setImageResource(R.drawable.ic_cloudy)
-
 
         }
 
@@ -173,10 +180,6 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
 
     }
 
-    private fun showHourlyForecastText()
-    {
-        binding.textViewHourlyForecast.text = "PROGNOZA GODZINOWA"//TODO make it based on language selected in settings
-    }
 
     private fun showLocation(location: String){
         (activity as? AppCompatActivity)?.supportActionBar?.title = location
@@ -184,7 +187,19 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
     }
 
     private fun showDate(){
-        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "piątek, 17 grudnia 2021" //TODO Set it based on current date
+        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "piątek, 17 grudnia 2021" //TODO HARD CODED , Set it based on current date
+
+    }
+
+    private fun setWeatherDescription(id:Int)
+    {
+        when(id){
+
+            //TODO ADD STRINGS DESCRIBING WEATHER BASED ON WEATHER ID AND SET IT
+
+        }
+
+        binding.textViewWeatherdescription.text  = "Cloudy" //TODO HARD CODED
 
     }
 

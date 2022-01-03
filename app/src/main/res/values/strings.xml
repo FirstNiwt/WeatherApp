@@ -1,28 +1,38 @@
 <resources>
+
+    //ACTIVITY MAIN
     <string name="app_name">WeatherApp</string>
+    <string name="app_title">Weather App</string>
+    //TOP APP BAR
     <string name="auto_localisation_desc">automatic localisation</string>
     <string name="localisation">localisation</string>
-    <string name="app_title">Olkusz, Poland</string>
-    <string name="current_weather_decription">current weather decription</string>
-    <string name="current_time">00.00</string>
-    <string name="current_date">pon. 31 gru 2021</string>
-    <string name="current_temperature">12°C</string>
-    <string name="current_weather_short_description">Sunny</string>
+
+    //BOTTOM NAVIGATION
     <string name="today">Today</string>
     <string name="week">Week</string>
     <string name="notification">Notifications</string>
     <string name="settings">Settings</string>
     <string name="alarm">Alerts</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="monthly">Monthly</string>
-    <string name="weekly">Weekly</string>
-    <string name="alerts">alerts</string>
-    <string name="nothingselected">nothingSelected</string>
     <string name="home">Home</string>
+
+
+
+    //CURRENT WEATHER FRAGMENT
     <string name="humidity_place_holder">%1$d\%%</string>
     <string name="cloudiness_place_holder">%1$d%%</string>
     <string name="temperature_place_holder">%1$d°</string>
     <string name="wind_speed_place_holder_metric">%1$d km/h</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hourly_weather_temperature">  </string>
+    <string name="current_weather_item_description">current weather description</string>
+    <string name="hourly_loading_text">Loading</string>
+    <string name="hourly_forecast_title">Hourly Forecast</string>
+    <string name="current_weather_detailed_loading_main">Loading</string>
+    <string name="current_weather_detailed_main_image_view">picture describing weather outside</string>
+    <string name="current_weather_detailed_wind_image_view">picture of wind</string>
+    <string name="current_weather_detailed_humidity_image_view">picture of hygrometr</string>
+    <string name="current_weather_detailed_cloud_image_view">picture of cloud</string>
+    //HOURLY WEATHER ITEM
+    <string name="hourly_weather_item_humidity_value">  </string>
+
+
 </resources>

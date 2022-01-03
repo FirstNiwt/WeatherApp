@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="5dp"
+    android:background="@drawable/border">
 
     <TextView
         android:id="@+id/hourly_weather_time"
@@ -12,34 +14,55 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="12:00"
-        app:layout_constraintBottom_toTopOf="@+id/hourly_weather_temperature"
+        android:textAlignment="center"
+        android:textColor="@color/font_color"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="12:00" />
 
     <TextView
         android:id="@+id/hourly_weather_temperature"
         android:layout_width="45dp"
         android:layout_height="25dp"
-        android:layout_marginBottom="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/hourly_weather_image"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/font_color"
         app:layout_constraintEnd_toEndOf="@+id/hourly_weather_time"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/hourly_weather_time"
-        app:layout_constraintTop_toBottomOf="@+id/hourly_weather_time" />
+        app:layout_constraintTop_toBottomOf="@+id/hourly_weather_time"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:text="@string/hourly_weather_temperature" />
 
     <ImageView
         android:id="@+id/hourly_weather_image"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/hourly_weather_temperature"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/hourly_weather_temperature"
+        app:layout_constraintTop_toBottomOf="@+id/hourly_weather_temperature"
+        app:srcCompat="@drawable/ic_baseline_wb_sunny_24"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/textView_humidity_hourly"
+        android:layout_width="45dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:text="@string/hourly_weather_item_humidity_value"
+        android:textAlignment="center"
+        android:textColor="@color/font_color"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_wb_sunny_24" />
+        app:layout_constraintEnd_toEndOf="@+id/hourly_weather_image"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/hourly_weather_image"
+        app:layout_constraintTop_toBottomOf="@+id/hourly_weather_image"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="11%" />
 </androidx.constraintlayout.widget.ConstraintLayout>
