@@ -10,9 +10,9 @@
         android:label="currentWeatherDetailedFragment"
         tools:layout="@layout/current_weather_detailed_fragment" />
     <fragment
-        android:id="@+id/weeklyListWeatherFragment"
-        android:name="com.example.weatherapp.ui.weather.weekly.WeeklyListWeatherFragment"
-        android:label="WeeklyListWeatherFragment" />
+        android:id="@+id/DailyWeatherListFragment"
+        android:name="com.example.weatherapp.ui.weather.weekly.DailyWeatherListFragment"
+        android:label="DailyWeatherListFragment" />
     <fragment
         android:id="@+id/weeklyDetailWeatherFragment"
         android:name="com.example.weatherapp.ui.weather.weekly.detailed.WeeklyDetailWeatherFragment"

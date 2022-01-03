@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.weather.weekly.WeeklyListWeatherFragment">
+    android:background="@drawable/background4"
+    tools:context=".ui.weather.weekly.DailyWeatherListFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:text="Weekly" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

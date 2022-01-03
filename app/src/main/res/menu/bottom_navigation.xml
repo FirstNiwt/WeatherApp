@@ -12,7 +12,7 @@
         android:icon = "@drawable/ic_baseline_today_24"
         android:title="@string/today"/>
     <item
-        android:id="@+id/weeklyListWeatherFragment"
+        android:id="@+id/DailyWeatherListFragment"
         android:icon = "@drawable/ic_baseline_calendar_view_week_24"
         android:title="@string/week"/>
     <item

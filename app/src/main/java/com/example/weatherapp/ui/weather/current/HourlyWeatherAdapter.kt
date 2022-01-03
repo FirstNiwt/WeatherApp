@@ -41,8 +41,6 @@ class HourlyWeatherAdapter(private var hourlyWeatherList: MutableList<Hourly>): 
     class HourlyWeatherViewHolder(private val binding:HourlyWeatherItemBinding): RecyclerView.ViewHolder(binding.root) {
 
 
-
-
        fun bindHourlyWeather(hourlyWeather:Hourly)
         {
 
@@ -50,8 +48,8 @@ class HourlyWeatherAdapter(private var hourlyWeatherList: MutableList<Hourly>): 
 
             val date = Date(hourlyWeather.dt*1000L)
 
-           binding.hourlyWeatherTime.text = simpleDateFormat.format(date)
-            setWeatherImage(hourlyWeather.weather[0].id)//TODO HARD CODED
+            binding.hourlyWeatherTime.text = simpleDateFormat.format(date)
+            setWeatherImage(hourlyWeather.weather[0].id)
             binding.hourlyWeatherTemperature.text = hourlyWeather.temp.roundToInt().toString() + "°" //TODO ADD PLACE HOLDER
             binding.textViewHumidityHourly.text = hourlyWeather.humidity.toString() + "%"  //TODO ADD PLACE HOLDER
 

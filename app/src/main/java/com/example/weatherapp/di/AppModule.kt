@@ -10,6 +10,7 @@ import com.example.weatherapp.data.network.*
 import com.example.weatherapp.data.repository.ForecastRepository
 import com.example.weatherapp.data.repository.ForecastRepositoryImpl
 import com.example.weatherapp.ui.weather.current.CurrentWeatherViewModelFactory
+import com.example.weatherapp.ui.weather.weekly.DailyWeatherListFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -63,6 +64,10 @@ object AppModule {
     fun provideCurrentWeatherViewModelFactory(forecastRepository: ForecastRepository)
     = CurrentWeatherViewModelFactory(forecastRepository)
 
+    @Provides
+    @Singleton
+    fun provideDailyWeatherListViewModelFactory(forecastRepository: ForecastRepository)
+            = DailyWeatherListFactory(forecastRepository)
 
 
 

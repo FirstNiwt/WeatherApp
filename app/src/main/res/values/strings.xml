@@ -16,13 +16,12 @@
     <string name="home">Home</string>
 
 
-
     //CURRENT WEATHER FRAGMENT
     <string name="humidity_place_holder">%1$d\%%</string>
     <string name="cloudiness_place_holder">%1$d%%</string>
     <string name="temperature_place_holder">%1$d°</string>
     <string name="wind_speed_place_holder_metric">%1$d km/h</string>
-    <string name="hourly_weather_temperature">  </string>
+
     <string name="current_weather_item_description">current weather description</string>
     <string name="hourly_loading_text">Loading</string>
     <string name="hourly_forecast_title">Hourly Forecast</string>
@@ -31,8 +30,8 @@
     <string name="current_weather_detailed_wind_image_view">picture of wind</string>
     <string name="current_weather_detailed_humidity_image_view">picture of hygrometr</string>
     <string name="current_weather_detailed_cloud_image_view">picture of cloud</string>
-    //HOURLY WEATHER ITEM
-    <string name="hourly_weather_item_humidity_value">  </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -150,7 +150,7 @@
         android:contentDescription="@string/current_weather_detailed_humidity_image_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_wind"
-        tools:src="@drawable/ic_humidity" />
+        tools:src="@drawable/ic_singledrop" />
 
     <TextView
         android:id="@+id/textView_humidity"

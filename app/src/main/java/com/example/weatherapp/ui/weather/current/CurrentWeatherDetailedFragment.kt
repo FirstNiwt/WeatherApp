@@ -93,11 +93,6 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
 
 
 
-
-
-
-
-
             })
 
         futureWeather.observe(this@CurrentWeatherDetailedFragment, Observer{
@@ -143,7 +138,7 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
 
     private fun showHumidityImage()
     {
-        binding.imageViewHumidity.setImageResource(R.drawable.ic_humidity)
+        binding.imageViewHumidity.setImageResource(R.drawable.ic_singledrop)
     }
 
     private fun showCloudinessImage()
