@@ -7,6 +7,8 @@ import com.example.weatherapp.data.CurrentWeatherDao
 import com.example.weatherapp.data.FutureWeatherDao
 import com.example.weatherapp.data.db.ForecastDatabase
 import com.example.weatherapp.data.network.*
+import com.example.weatherapp.data.provider.UnitProvider
+import com.example.weatherapp.data.provider.UnitProviderImpl
 import com.example.weatherapp.data.repository.ForecastRepository
 import com.example.weatherapp.data.repository.ForecastRepositoryImpl
 import com.example.weatherapp.ui.weather.current.CurrentWeatherViewModelFactory
@@ -61,14 +63,17 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCurrentWeatherViewModelFactory(forecastRepository: ForecastRepository)
-    = CurrentWeatherViewModelFactory(forecastRepository)
+    fun provideCurrentWeatherViewModelFactory(forecastRepository: ForecastRepository,unitProvider: UnitProvider)
+    = CurrentWeatherViewModelFactory(forecastRepository,unitProvider)
 
     @Provides
     @Singleton
-    fun provideDailyWeatherListViewModelFactory(forecastRepository: ForecastRepository)
-            = DailyWeatherListFactory(forecastRepository)
+    fun provideDailyWeatherListViewModelFactory(forecastRepository: ForecastRepository, unitProvider:UnitProvider)
+            = DailyWeatherListFactory(forecastRepository,unitProvider)
 
+    @Provides
+    @Singleton
+    fun provideUnitProviderImpl(@ApplicationContext app: Context) = UnitProviderImpl(app)
 
 
 

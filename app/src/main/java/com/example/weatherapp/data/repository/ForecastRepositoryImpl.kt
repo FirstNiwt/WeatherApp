@@ -16,7 +16,7 @@ import java.time.ZonedDateTime
 import java.util.concurrent.Future
 import javax.inject.Inject
 
-class ForecastRepositoryImpl @Inject constructor(
+class ForecastRepositoryImpl constructor(
     private val currentWeatherDao:CurrentWeatherDao,
     private val futureWeatherDao: FutureWeatherDao,
     private val weatherNetworkDataSource: WeatherNetworkDataSource
@@ -35,7 +35,7 @@ class ForecastRepositoryImpl @Inject constructor(
     }
     override suspend fun getCurrentWeather(units: String): LiveData<CurrentWeatherEntry> {
        return withContext(Dispatchers.IO){
-           initWeatherData()
+           initWeatherData(units)
            return@withContext currentWeatherDao.readWeatherData()
        }
 
@@ -44,15 +44,15 @@ class ForecastRepositoryImpl @Inject constructor(
 
     override suspend fun getFutureWeather(units: String): LiveData<FutureWeatherEntry> {
        return withContext(Dispatchers.IO){
-           initWeatherData()
+           initWeatherData(units)
            return@withContext futureWeatherDao.readWeatherData()
        }
     }
 
-    private suspend fun initWeatherData() {
+    private suspend fun initWeatherData(units: String) {
 
-            fetchCurrentWeather()
-            fetchFutureWeather()
+            fetchCurrentWeather(units)
+            fetchFutureWeather(units)
     }
 
     private fun isFetchNeeded(lastFetchTime:LocalTime):Boolean{
@@ -62,12 +62,12 @@ class ForecastRepositoryImpl @Inject constructor(
 
     }
 
-    private suspend fun fetchCurrentWeather(){
-        weatherNetworkDataSource.fetchCurrentData("Olkusz","metric","en") //TODO get device location
+    private suspend fun fetchCurrentWeather(units: String){
+        weatherNetworkDataSource.fetchCurrentData("Olkusz",units,"en") //TODO get device location
     }
 
-    private suspend fun fetchFutureWeather(){
-        weatherNetworkDataSource.fetchFutureData(50.2813,19.56503,"minutely,alerts","metric","en")  //TODO get device location
+    private suspend fun fetchFutureWeather(units: String){
+        weatherNetworkDataSource.fetchFutureData(50.2813,19.56503,"minutely,alerts",units,"en")  //TODO get device location
     }
 
     private fun preserveCurrentWeather(currentWeather:CurrentWeatherEntry){

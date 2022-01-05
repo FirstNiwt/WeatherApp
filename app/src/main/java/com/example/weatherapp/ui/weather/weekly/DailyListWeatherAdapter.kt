@@ -1,22 +1,25 @@
 package com.example.weatherapp.ui.weather.weekly
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.data.db.entity.Daily
+import com.example.weatherapp.data.provider.UnitProviderImpl
 import com.example.weatherapp.databinding.DailyWeatherItemBinding
-import com.example.weatherapp.databinding.HourlyWeatherItemBinding
-import com.example.weatherapp.ui.weather.current.HourlyWeatherAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
 class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>): RecyclerView.Adapter<DailyListWeatherAdapter.DailyListWeatherAdapterViewHolder>() {
+
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): DailyListWeatherAdapterViewHolder {
+
 
         val context = parent.context
         val inflater = LayoutInflater.from(context)
@@ -40,6 +43,7 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
     }
 
     class DailyListWeatherAdapterViewHolder(private val binding: DailyWeatherItemBinding): RecyclerView.ViewHolder(binding.root) {
+        var unitProvider: UnitProviderImpl = UnitProviderImpl(binding.root.context)
 
         fun bindDailyListWeather(dailyWeather:Daily)
         {
@@ -50,7 +54,10 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
             binding.textViewTemperatureWeekly.text = dailyWeather.temp.day.roundToInt().toString() + "°"  //TODO ADD PLACE HOLDER
             binding.textViewWeeklyHumidity.text = dailyWeather.humidity.toString() + "%"  //TODO ADD PLACE HOLDER
             binding.textViewWeeklyCloudiness.text = dailyWeather.clouds.toString() + "%" //TODO ADD PLACE HOLDER
-            binding.textViewWeeklyWind.text = dailyWeather.windSpeed.roundToInt().toString() + "km/h" //TODO ADD PLACE HOLDER
+
+
+            setWindSpeed(dailyWeather.windSpeed,unitProvider.getUnitType().toString())
+
             binding.textViewWeeklyDescription.text = "here description" // TODO CREATE FUNCTION FOR SETTING THIS
 
             binding.weeklyWeatherDate.text = simpleDateFormat.format(date)
@@ -60,6 +67,23 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
             setWeatherImage(dailyWeather.weather[0].id)
 
 
+        }
+
+
+        private fun setWindSpeed(windSpeed:Double,units:String)
+        {
+            if(units == "METRIC") {
+                binding.textViewWeeklyWind.text =  String.format(
+                    binding.root.context.getString(R.string.wind_speed_place_holder_metric),
+                    windSpeed.roundToInt()
+                )
+            }
+            else{
+                binding.textViewWeeklyWind.text = String.format(
+                    binding.root.context.getString(R.string.wind_speed_place_holder_imperial),
+                    windSpeed.roundToInt()
+                )
+            }
         }
 
         private fun setWeatherImage(id:Int)

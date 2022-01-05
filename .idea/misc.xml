@@ -18,7 +18,7 @@
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/current_weather_detailed_fragment.xml" value="0.26062322946175637" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/current_weather_fragment.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/daily_weather_item.xml" value="0.9" />
+        <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/daily_weather_item.xml" value="0.67" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/fragment_alerts.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/fragment_current_day_details.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/fragment_daily_weather_list.xml" value="0.31521739130434784" />
@@ -36,6 +36,7 @@
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/menu/bottom_navigation.xml" value="0.1" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/menu/top_app_bar.xml" value="0.1890625" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/xml/mobile_navigation.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/xml/preferences.xml" value="0.30932971014492755" />
       </map>
     </option>
   </component>
@@ -44,5 +45,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.9" />
+      </ProjectState>
+    </option>
   </component>
 </project>

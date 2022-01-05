@@ -21,6 +21,7 @@
     <string name="cloudiness_place_holder">%1$d%%</string>
     <string name="temperature_place_holder">%1$d°</string>
     <string name="wind_speed_place_holder_metric">%1$d km/h</string>
+    <string name="wind_speed_place_holder_imperial">%1$d mi/h</string>
 
     <string name="current_weather_item_description">current weather description</string>
     <string name="hourly_loading_text">Loading</string>

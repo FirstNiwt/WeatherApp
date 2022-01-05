@@ -13,6 +13,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.data.db.entity.Hourly
 import com.example.weatherapp.data.network.OpenWeatherApiService
 import com.example.weatherapp.data.network.WeatherNetworkDataSourceImpl
+import com.example.weatherapp.data.provider.UnitProvider
 import com.example.weatherapp.data.repository.ForecastRepository
 import com.example.weatherapp.databinding.CurrentWeatherDetailedFragmentBinding
 import com.example.weatherapp.ui.base.ScopedFragment
@@ -29,6 +30,7 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
     @Inject lateinit var weatherNetworkDataSource:WeatherNetworkDataSourceImpl
     @Inject lateinit var viewModelFactory:CurrentWeatherViewModelFactory
     @Inject lateinit var forecastRepository: ForecastRepository
+    @Inject lateinit var unitProvider: UnitProvider
     private lateinit var hourlyAdapter: HourlyWeatherAdapter
 
     private var _binding: CurrentWeatherDetailedFragmentBinding? = null
@@ -52,6 +54,9 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[CurrentWeatherDetailedViewModel::class.java]
+        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "piątek, 17 grudnia 2021"
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Olkusz"
+        (activity as? AppCompatActivity)?.supportActionBar?.show()
 
        bindUI()
 
@@ -74,9 +79,6 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
             binding.groupLoadingCurrent.visibility = View.GONE
 
 
-            showLocation("Olkusz")// TODO HARDCODED use phone location
-            showDate()
-
             setWeatherDescription(0)
             setWeatherImage(it.weather[0].id)
             setTemperature(it.main.temp)
@@ -89,7 +91,7 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
 
 
             showWindImage()
-            setWindSpeed(it.wind.speed,"") //TODO get units from settings
+            setWindSpeed(it.wind.speed,unitProvider.getUnitType().toString())
 
 
 
@@ -170,21 +172,24 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
     }
     private fun setWindSpeed(windSpeed:Double,units:String)
     {
-        binding.textViewWindSpeed.text = String.format(getString(R.string.wind_speed_place_holder_metric),
-            windSpeed.roundToInt())
-
+        if(units == "METRIC") {
+            binding.textViewWindSpeed.text = String.format(
+                getString(R.string.wind_speed_place_holder_metric),
+                windSpeed.roundToInt()
+            )
+        }
+        else{
+            binding.textViewWindSpeed.text = String.format(
+                getString(R.string.wind_speed_place_holder_imperial),
+                windSpeed.roundToInt()
+            )
+        }
     }
 
 
-    private fun showLocation(location: String){
-        (activity as? AppCompatActivity)?.supportActionBar?.title = location
-        (activity as? AppCompatActivity)?.supportActionBar?.show()
-    }
 
-    private fun showDate(){
-        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "piątek, 17 grudnia 2021" //TODO HARD CODED , Set it based on current date
 
-    }
+
 
     private fun setWeatherDescription(id:Int)
     {

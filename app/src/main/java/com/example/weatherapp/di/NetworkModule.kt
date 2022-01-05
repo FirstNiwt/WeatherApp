@@ -5,6 +5,8 @@ import com.example.weatherapp.data.network.ConnectivityInterceptor
 import com.example.weatherapp.data.network.ConnectivityInterceptorImpl
 import com.example.weatherapp.data.network.WeatherNetworkDataSource
 import com.example.weatherapp.data.network.WeatherNetworkDataSourceImpl
+import com.example.weatherapp.data.provider.UnitProvider
+import com.example.weatherapp.data.provider.UnitProviderImpl
 import com.example.weatherapp.data.repository.ForecastRepository
 import com.example.weatherapp.data.repository.ForecastRepositoryImpl
 import dagger.Binds
@@ -31,6 +33,8 @@ abstract class NetworkModule {
     @Binds
     abstract fun providesWeatherNetworkDataSource(weatherNetworkDataSourceImpl: WeatherNetworkDataSourceImpl): WeatherNetworkDataSource
 
+    @Binds
+    abstract fun providesUnitProvider(unitProviderImpl:UnitProviderImpl):UnitProvider
 
 
 }

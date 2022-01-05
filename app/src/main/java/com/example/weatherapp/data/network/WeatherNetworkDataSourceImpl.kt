@@ -10,7 +10,7 @@ import com.example.weatherapp.data.db.entity.FutureWeatherEntry
 import com.example.weatherapp.internal.NoConnectivityException
 import javax.inject.Inject
 
-class WeatherNetworkDataSourceImpl @Inject constructor (private val openWeatherApiService: OpenWeatherApiService) : WeatherNetworkDataSource {
+class WeatherNetworkDataSourceImpl constructor (private val openWeatherApiService: OpenWeatherApiService) : WeatherNetworkDataSource {
     private val _fetchedCurrentWeather = MutableLiveData<CurrentWeatherEntry>()
     private val _fetchedFutureWeather = MutableLiveData<FutureWeatherEntry>()
 

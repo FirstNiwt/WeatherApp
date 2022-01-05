@@ -11,7 +11,7 @@ import okhttp3.Response
 import java.io.IOException
 import javax.inject.Inject
 
-class ConnectivityInterceptorImpl @Inject constructor(context: Context) : ConnectivityInterceptor
+class ConnectivityInterceptorImpl constructor(context: Context) : ConnectivityInterceptor
 {
     private val appContext = context.applicationContext
 
