@@ -32,4 +32,15 @@
             app:entryValues="@array/unitSystemValues"
             />
    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Alerts">
+
+        <SwitchPreference
+            android:key="SHOW_ALERTS"
+            android:title="Show weather alerts"
+            android:summary="Allow this app to notify you about special weather conditions"
+            android:defaultValue="false"
+           />
+    </PreferenceCategory>
 </PreferenceScreen>

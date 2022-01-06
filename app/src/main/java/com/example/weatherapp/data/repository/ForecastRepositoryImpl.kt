@@ -10,11 +10,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.time.LocalDate
-import java.time.LocalTime
 import java.time.ZonedDateTime
-import java.util.concurrent.Future
-import javax.inject.Inject
+
 
 class ForecastRepositoryImpl constructor(
     private val currentWeatherDao:CurrentWeatherDao,
@@ -51,13 +48,16 @@ class ForecastRepositoryImpl constructor(
 
     private suspend fun initWeatherData(units: String) {
 
+
             fetchCurrentWeather(units)
             fetchFutureWeather(units)
+
+
     }
 
-    private fun isFetchNeeded(lastFetchTime:LocalTime):Boolean{
+    private fun isFetchNeeded(lastFetchTime:ZonedDateTime):Boolean{
 
-        val fifteenMinutesAgo = ZonedDateTime.now().minusMinutes(15).toLocalTime()
+        val fifteenMinutesAgo = ZonedDateTime.now().minusMinutes(15)
         return lastFetchTime.isBefore(fifteenMinutesAgo)
 
     }
@@ -67,7 +67,7 @@ class ForecastRepositoryImpl constructor(
     }
 
     private suspend fun fetchFutureWeather(units: String){
-        weatherNetworkDataSource.fetchFutureData(50.2813,19.56503,"minutely,alerts",units,"en")  //TODO get device location
+        weatherNetworkDataSource.fetchFutureData(50.2813,19.56503,"minutely",units,"en")  //TODO get device location
     }
 
     private fun preserveCurrentWeather(currentWeather:CurrentWeatherEntry){

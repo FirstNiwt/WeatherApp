@@ -1,14 +1,13 @@
 package com.example.weatherapp.data.db
 
-import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
+import com.example.weatherapp.data.db.entity.Alert
 import com.example.weatherapp.data.db.entity.Daily
 import com.example.weatherapp.data.db.entity.Hourly
 import com.example.weatherapp.data.db.entity.Weather
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
-import java.util.*
 
 
 class Converters {
@@ -61,6 +60,18 @@ class Converters {
         return Gson().fromJson(weatherString,listType)
     }
 
+    @TypeConverter
+    fun fromListAlertToString(hourlyList: List<Alert>):String
+    {
+        return Gson().toJson(hourlyList)
+    }
 
+    @TypeConverter
+    fun fromStringToAlertList(weatherString: String): List<Alert>
+    {
+        val listType: Type = object : TypeToken<List<Alert>>() {}.type
+
+        return Gson().fromJson(weatherString,listType)
+    }
 
 }

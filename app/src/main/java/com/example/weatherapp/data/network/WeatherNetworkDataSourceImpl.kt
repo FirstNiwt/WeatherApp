@@ -1,14 +1,13 @@
 package com.example.weatherapp.data.network
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.weatherapp.data.db.entity.CurrentWeatherEntry
 import com.example.weatherapp.data.db.entity.FutureWeatherEntry
 
 import com.example.weatherapp.internal.NoConnectivityException
-import javax.inject.Inject
+
 
 class WeatherNetworkDataSourceImpl constructor (private val openWeatherApiService: OpenWeatherApiService) : WeatherNetworkDataSource {
     private val _fetchedCurrentWeather = MutableLiveData<CurrentWeatherEntry>()

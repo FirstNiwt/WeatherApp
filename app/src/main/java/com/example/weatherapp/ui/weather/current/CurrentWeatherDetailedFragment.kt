@@ -26,10 +26,7 @@ import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class CurrentWeatherDetailedFragment : ScopedFragment() {
-    @Inject lateinit var apiService: OpenWeatherApiService
-    @Inject lateinit var weatherNetworkDataSource:WeatherNetworkDataSourceImpl
     @Inject lateinit var viewModelFactory:CurrentWeatherViewModelFactory
-    @Inject lateinit var forecastRepository: ForecastRepository
     @Inject lateinit var unitProvider: UnitProvider
     private lateinit var hourlyAdapter: HourlyWeatherAdapter
 

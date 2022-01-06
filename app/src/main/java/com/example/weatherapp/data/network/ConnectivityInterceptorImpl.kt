@@ -3,13 +3,10 @@ package com.example.weatherapp.data.network
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.example.weatherapp.internal.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response
-import java.io.IOException
-import javax.inject.Inject
+
 
 class ConnectivityInterceptorImpl constructor(context: Context) : ConnectivityInterceptor
 {

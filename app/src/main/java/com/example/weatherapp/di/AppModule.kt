@@ -1,8 +1,6 @@
 package com.example.weatherapp.di
 
 import android.content.Context
-import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.weatherapp.data.CurrentWeatherDao
 import com.example.weatherapp.data.FutureWeatherDao
 import com.example.weatherapp.data.db.ForecastDatabase
@@ -13,14 +11,11 @@ import com.example.weatherapp.data.repository.ForecastRepository
 import com.example.weatherapp.data.repository.ForecastRepositoryImpl
 import com.example.weatherapp.ui.weather.current.CurrentWeatherViewModelFactory
 import com.example.weatherapp.ui.weather.weekly.DailyWeatherListFactory
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import java.util.concurrent.Future
 import javax.inject.Singleton
 
 
