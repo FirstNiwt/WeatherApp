@@ -17,4 +17,13 @@ interface CurrentWeatherDao {
     @Query("select * from current_weather where keyId = $CURRENT_WEATHER_ID")
     fun readWeatherData(): LiveData<CurrentWeatherEntry>
 
+    @Query("select coordinate_lat from current_weather where keyId = $CURRENT_WEATHER_ID ")
+    fun getWeatherLocationLat():Double?
+
+    @Query("select coordinate_lon from current_weather where keyId = $CURRENT_WEATHER_ID ")
+    fun getWeatherLocationLon():Double?
+
+    @Query("select dt from current_weather where keyId = $CURRENT_WEATHER_ID")
+    fun getWeatherFetchTime():Int?
+
 }

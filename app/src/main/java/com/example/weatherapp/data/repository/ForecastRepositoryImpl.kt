@@ -1,22 +1,27 @@
 package com.example.weatherapp.data.repository
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import com.example.weatherapp.data.CurrentWeatherDao
 import com.example.weatherapp.data.FutureWeatherDao
 import com.example.weatherapp.data.db.entity.CurrentWeatherEntry
 import com.example.weatherapp.data.db.entity.FutureWeatherEntry
 import com.example.weatherapp.data.network.WeatherNetworkDataSource
+import com.example.weatherapp.data.provider.LocationProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.Instant
+import java.time.ZoneOffset
 import java.time.ZonedDateTime
 
 
 class ForecastRepositoryImpl constructor(
     private val currentWeatherDao:CurrentWeatherDao,
     private val futureWeatherDao: FutureWeatherDao,
-    private val weatherNetworkDataSource: WeatherNetworkDataSource
+    private val weatherNetworkDataSource: WeatherNetworkDataSource,
+    private val locationProvider:LocationProvider
 ) : ForecastRepository {
     init{
         weatherNetworkDataSource.apply{
@@ -48,17 +53,33 @@ class ForecastRepositoryImpl constructor(
 
     private suspend fun initWeatherData(units: String) {
 
+        val lastLat:Double? = currentWeatherDao.getWeatherLocationLat()
+        val lastLon:Double? = currentWeatherDao.getWeatherLocationLon()
+        val lastFetchSeconds:Int? = currentWeatherDao.getWeatherFetchTime()
+
+        val i = lastFetchSeconds?.let { Instant.ofEpochSecond(it.toLong()) }
+        val lastFetchTime = ZonedDateTime.ofInstant(i,ZoneOffset.UTC)
+
+        if((lastLat == null || lastLon == null)
+            || locationProvider.hasLocationChanged(lastLat,lastLon)
+                )
+        {
+            fetchCurrentWeather(units)
+            fetchFutureWeather(units)
+            return
+        }
+
+        if(isFetchNeeded(lastFetchTime))
 
             fetchCurrentWeather(units)
             fetchFutureWeather(units)
-
 
     }
 
     private fun isFetchNeeded(lastFetchTime:ZonedDateTime):Boolean{
 
-        val fifteenMinutesAgo = ZonedDateTime.now().minusMinutes(15)
-        return lastFetchTime.isBefore(fifteenMinutesAgo)
+        val fifteenMinutesAgo = Instant.now().minusSeconds(900)
+        return lastFetchTime.isBefore(ZonedDateTime.ofInstant(fifteenMinutesAgo,ZoneOffset.UTC))
 
     }
 

@@ -5,6 +5,8 @@ import com.example.weatherapp.data.CurrentWeatherDao
 import com.example.weatherapp.data.FutureWeatherDao
 import com.example.weatherapp.data.db.ForecastDatabase
 import com.example.weatherapp.data.network.*
+import com.example.weatherapp.data.provider.LocationProvider
+import com.example.weatherapp.data.provider.LocationProviderImpl
 import com.example.weatherapp.data.provider.UnitProvider
 import com.example.weatherapp.data.provider.UnitProviderImpl
 import com.example.weatherapp.data.repository.ForecastRepository
@@ -49,7 +51,8 @@ object AppModule {
     @Provides
     @Singleton
     fun provideForecastRepositoryImpl(currentWeatherDao: CurrentWeatherDao,futureWeatherDao:FutureWeatherDao,weatherNetworkDataSource:
-    WeatherNetworkDataSource) = ForecastRepositoryImpl(currentWeatherDao,futureWeatherDao, weatherNetworkDataSource)
+    WeatherNetworkDataSource,locationProvider: LocationProvider) =
+        ForecastRepositoryImpl(currentWeatherDao,futureWeatherDao, weatherNetworkDataSource,locationProvider)
 
     @Provides
     @Singleton
@@ -69,6 +72,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideUnitProviderImpl(@ApplicationContext app: Context) = UnitProviderImpl(app)
+
+    @Provides
+    @Singleton
+    fun provideLocationProviderImpl() = LocationProviderImpl()
 
 
 
