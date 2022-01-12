@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background4"
+    android:background="#BFEFFF"
     tools:context=".ui.weather.current.CurrentWeatherDetailedFragment">
 
 
@@ -44,8 +44,8 @@
 
     <ImageView
         android:id="@+id/imageView_weather_type"
-        android:layout_width="285dp"
-        android:layout_height="245dp"
+        android:layout_width="252dp"
+        android:layout_height="171dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="4dp"
         android:contentDescription="@string/current_weather_detailed_main_image_view"
@@ -111,90 +111,63 @@
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="RtlCompat" />
 
-    <ImageView
-        android:id="@+id/imageView_wind"
-        android:layout_width="35dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/current_weather_detailed_wind_image_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_temperature"
-        tools:src="@drawable/ic_wind" />
-
     <TextView
         android:id="@+id/textView_wind_speed"
         android:layout_width="51dp"
         android:layout_height="32dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="92dp"
         android:fontFamily="@font/roboto"
         android:gravity="center_vertical"
         android:textAlignment="center"
         android:textColor="@color/font_color"
         android:textSize="@dimen/small_info_text_size"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_weather_type"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/imageView_wind"
         app:layout_constraintTop_toBottomOf="@+id/textView_temperature"
         tools:ignore="RtlCompat"
         tools:text="19 km/h" />
 
-    <ImageView
-        android:id="@+id/imageView_humidity"
-        android:layout_width="35dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/current_weather_detailed_humidity_image_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_wind"
-        tools:src="@drawable/ic_singledrop" />
-
-    <TextView
-        android:id="@+id/textView_humidity"
-        android:layout_width="51dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/roboto"
-        android:gravity="center_vertical"
-        android:textAlignment="center"
-        android:textColor="@color/font_color"
-        android:textSize="@dimen/small_info_text_size"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_weather_type"
-        app:layout_constraintTop_toBottomOf="@+id/textView_wind_speed"
-        tools:ignore="RtlCompat"
-        tools:text="92%" />
 
     <ImageView
         android:id="@+id/imageView_cloudiness"
         android:layout_width="35dp"
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:contentDescription="@string/current_weather_detailed_cloud_image_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_humidity"
         tools:src="@drawable/ic_cloud" />
 
     <TextView
-        android:id="@+id/textView_cloudiness"
+        android:id="@+id/textView_humidity"
         android:layout_width="51dp"
         android:layout_height="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto"
         android:gravity="center_vertical"
         android:textAlignment="center"
         android:textColor="@color/font_color"
         android:textSize="@dimen/small_info_text_size"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_weather_type"
+        app:layout_constraintTop_toBottomOf="@+id/textView_wind_speed"
+        tools:ignore="RtlCompat"
+        tools:layout_editor_absoluteX="147dp"
+        tools:text="92%" />
+
+    <TextView
+        android:id="@+id/textView_cloudiness"
+        android:layout_width="51dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_vertical"
+        android:textAlignment="center"
+        android:textColor="@color/font_color"
+        android:textSize="@dimen/small_info_text_size"
         app:layout_constraintTop_toBottomOf="@+id/textView_humidity"
         tools:ignore="RtlCompat"
+        tools:layout_editor_absoluteX="147dp"
         tools:text="11%" />
-
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_loading_hourly_forecast"
@@ -249,5 +222,53 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView_weather_type"
         app:layout_constraintVertical_bias="0.005"
         tools:text="Cloudy" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="87dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:text="Percitipation:"
+        android:textAlignment="center"
+        android:textColor="@color/font_color"
+        app:layout_constraintStart_toEndOf="@+id/imageView_humidity"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="45dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="88dp"
+        android:gravity="center_vertical"
+        android:text="Wind:"
+        android:textAlignment="center"
+        android:textColor="@color/font_color"
+        app:layout_constraintStart_toEndOf="@+id/imageView_wind"
+        app:layout_constraintTop_toBottomOf="@+id/textView_temperature" />
+
+    <ImageView
+        android:id="@+id/imageView_wind"
+        android:layout_width="35dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="88dp"
+        android:contentDescription="@string/current_weather_detailed_wind_image_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_temperature"
+        tools:src="@drawable/ic_wind" />
+
+    <ImageView
+        android:id="@+id/imageView_humidity"
+        android:layout_width="35dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/current_weather_detailed_humidity_image_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:src="@drawable/ic_singledrop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

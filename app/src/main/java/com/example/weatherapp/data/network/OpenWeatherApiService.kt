@@ -19,17 +19,26 @@ const val API_KEY = "5c3093d00be11bfdc4054d761135fabf"
 interface OpenWeatherApiService {
 
     @GET("weather")
-    fun getCurrentWeatherData(
+    fun getCurrentWeatherDataByLocationAsync(
         @Query("q") location: String,
         @Query("units") units: String = "metric",
         @Query("lang") languageOfResponse: String = "en",
 
     ): Deferred<CurrentWeatherEntry>
 
+    @GET("weather")
+    fun getCurrentWeatherDataByCoordinatesAsync(
+        @Query("lat") positionLat: Double,
+        @Query("lon") positionLon:Double,
+        @Query("units") units: String = "metric",
+        @Query("lang") languageOfResponse: String = "en",
+    ):Deferred<CurrentWeatherEntry>
+
+
     @GET("onecall")
-    fun getFutureWeatherData(
-        @Query("lat") positionLat: Double = 50.2813 ,
-        @Query("lon") positionLon: Double = 19.56503 ,
+    fun getFutureWeatherDataByCoordinatesAsync(
+        @Query("lat") positionLat: Double?,
+        @Query("lon") positionLon: Double?,
         @Query("exclude") excludeFromCall: String = "minutely,alerts",
         @Query("units") units: String = "metric",
         @Query("lang") languageOfResponse: String = "en"

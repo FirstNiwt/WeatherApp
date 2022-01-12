@@ -10,6 +10,7 @@ const val FUTURE_WEATHER_ID = 1
 
 @Entity(tableName = "future_weather")
 data class FutureWeatherEntry(
+
     val daily: List<Daily>,
     val hourly: List<Hourly>,
     val lat: Double,

@@ -11,6 +11,8 @@ interface WeatherNetworkDataSource {
     val fetchedFutureWeather: LiveData<FutureWeatherEntry>
 
 
-    suspend fun fetchCurrentData(location:String, units:String, languageOfResponse:String)
-    suspend fun fetchFutureData(lat:Double, lon:Double, exclude:String, units:String, languageOfResponse: String)
+    suspend fun fetchCurrentDataByLocation(location:String, units:String, languageOfResponse:String)
+    suspend fun fetchCurrentDataByCoordinates(lat:Double,lon: Double,units: String,languageOfResponse: String)
+    suspend fun fetchFutureDataByCoordinates(lat:Double?, lon:Double?, exclude:String, units:String, languageOfResponse: String)
+
 }

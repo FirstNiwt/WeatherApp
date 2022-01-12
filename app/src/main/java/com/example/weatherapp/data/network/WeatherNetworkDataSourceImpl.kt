@@ -18,14 +18,15 @@ class WeatherNetworkDataSourceImpl constructor (private val openWeatherApiServic
 
     override val fetchedFutureWeather: LiveData<FutureWeatherEntry>
         get() = _fetchedFutureWeather
-    override suspend fun fetchCurrentData(
+
+    override suspend fun fetchCurrentDataByLocation(
         location: String,
         units: String,
         languageOfResponse: String
     ) {
        try {
            val currentWeather = openWeatherApiService
-               .getCurrentWeatherData(location,units,languageOfResponse)
+               .getCurrentWeatherDataByLocationAsync(location,units,languageOfResponse)
                .await()
            _fetchedCurrentWeather.postValue(currentWeather)
        }
@@ -35,16 +36,35 @@ class WeatherNetworkDataSourceImpl constructor (private val openWeatherApiServic
        }
     }
 
-    override suspend fun fetchFutureData(
+    override suspend fun fetchCurrentDataByCoordinates(
         lat: Double,
         lon: Double,
+        units: String,
+        languageOfResponse: String
+    ) {
+        try{
+            val currentWeather = openWeatherApiService
+                .getCurrentWeatherDataByCoordinatesAsync(lat,lon,units,languageOfResponse)
+                .await()
+            _fetchedCurrentWeather.postValue(currentWeather)
+        }
+        catch (e: NoConnectivityException)
+        {
+            Log.e("Connectivity", "No internet connection",e)
+        }
+    }
+
+
+    override suspend fun fetchFutureDataByCoordinates(
+        lat: Double?,
+        lon: Double?,
         exclude: String,
         units: String,
         languageOfResponse: String
     ) {
     try {
             val futureWeather = openWeatherApiService
-                .getFutureWeatherData(lat, lon,exclude,units, languageOfResponse)
+                .getFutureWeatherDataByCoordinatesAsync(lat, lon,exclude,units, languageOfResponse)
                 .await()
             _fetchedFutureWeather.postValue(futureWeather)
         }

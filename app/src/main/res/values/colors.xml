@@ -11,4 +11,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name = "teal_700">#FF03DAC5</color>
     <color name="font_color">#FF000000</color>
+    <color name= "sea_blue">#006994</color>
+    <color name="light_sea_blue">#9ce4ff</color>
+    <color name = "adapter_background_color">#bfe3ff</color>
 </resources>

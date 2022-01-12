@@ -14,5 +14,5 @@ class DailyWeatherListViewModel(private val forecastRepository: ForecastReposito
     private val units:String =  unitProvider.getUnitType().toString()
 
     val futureWeather by lazyDeferred {forecastRepository.getFutureWeather(units)}
-
+    val currentWeather by lazyDeferred {forecastRepository.getCurrentWeather(units)}
 }

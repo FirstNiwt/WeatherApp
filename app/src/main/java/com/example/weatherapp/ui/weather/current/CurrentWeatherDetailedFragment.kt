@@ -13,12 +13,17 @@ import com.example.weatherapp.R
 import com.example.weatherapp.data.db.entity.Hourly
 import com.example.weatherapp.data.network.OpenWeatherApiService
 import com.example.weatherapp.data.network.WeatherNetworkDataSourceImpl
+import com.example.weatherapp.data.provider.LocationProvider
+import com.example.weatherapp.data.provider.LocationProviderImpl
+import com.example.weatherapp.data.provider.PreferenceProvider
 import com.example.weatherapp.data.provider.UnitProvider
 import com.example.weatherapp.data.repository.ForecastRepository
 import com.example.weatherapp.databinding.CurrentWeatherDetailedFragmentBinding
 import com.example.weatherapp.ui.base.ScopedFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -40,20 +45,26 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
 
     private lateinit var viewModel: CurrentWeatherDetailedViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = null
+        (activity as? AppCompatActivity)?.supportActionBar?.title = null
+        super.onCreate(savedInstanceState)
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = CurrentWeatherDetailedFragmentBinding.inflate(inflater,container,false)
+
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[CurrentWeatherDetailedViewModel::class.java]
-        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "piątek, 17 grudnia 2021"
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "Olkusz"
-        (activity as? AppCompatActivity)?.supportActionBar?.show()
+
 
        bindUI()
 
@@ -71,7 +82,12 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
 
 
             }
+            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH)
+            val date = Date(it.dt*1000L)
 
+            (activity as? AppCompatActivity)?.supportActionBar?.subtitle = simpleDateFormat.format(date)
+            (activity as? AppCompatActivity)?.supportActionBar?.title = it.name
+            (activity as? AppCompatActivity)?.supportActionBar?.show()
 
             binding.groupLoadingCurrent.visibility = View.GONE
 

@@ -15,6 +15,7 @@ import kotlinx.coroutines.withContext
 import java.time.Instant
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
+import java.util.*
 
 
 class ForecastRepositoryImpl constructor(
@@ -46,7 +47,7 @@ class ForecastRepositoryImpl constructor(
 
     override suspend fun getFutureWeather(units: String): LiveData<FutureWeatherEntry> {
        return withContext(Dispatchers.IO){
-           initWeatherData(units)
+       initWeatherData(units)
            return@withContext futureWeatherDao.readWeatherData()
        }
     }
@@ -56,22 +57,21 @@ class ForecastRepositoryImpl constructor(
         val lastLat:Double? = currentWeatherDao.getWeatherLocationLat()
         val lastLon:Double? = currentWeatherDao.getWeatherLocationLon()
         val lastFetchSeconds:Int? = currentWeatherDao.getWeatherFetchTime()
+        val cityName:String? = currentWeatherDao.getCityName()
+
+
 
         val i = lastFetchSeconds?.let { Instant.ofEpochSecond(it.toLong()) }
         val lastFetchTime = ZonedDateTime.ofInstant(i,ZoneOffset.UTC)
 
         if((lastLat == null || lastLon == null)
-            || locationProvider.hasLocationChanged(lastLat,lastLon)
+            || locationProvider.hasLocationChanged(lastLat,lastLon,cityName)
                 )
         {
-            fetchCurrentWeather(units)
             fetchFutureWeather(units)
-            return
+
         }
-
         if(isFetchNeeded(lastFetchTime))
-
-            fetchCurrentWeather(units)
             fetchFutureWeather(units)
 
     }
@@ -83,12 +83,35 @@ class ForecastRepositoryImpl constructor(
 
     }
 
-    private suspend fun fetchCurrentWeather(units: String){
-        weatherNetworkDataSource.fetchCurrentData("Olkusz",units,"en") //TODO get device location
+    private suspend fun fetchCurrentWeather(units: String, city:String){
+
+            weatherNetworkDataSource.fetchCurrentDataByLocation(city,units,"en")
+
     }
 
     private suspend fun fetchFutureWeather(units: String){
-        weatherNetworkDataSource.fetchFutureData(50.2813,19.56503,"minutely",units,"en")  //TODO get device location
+        val preferredString:String = locationProvider.getPreferredLocation()
+        val preferredLocation:List<String> = preferredString.split(",")
+
+        if(preferredLocation.size == 2) //That means that we are using device location cuz we are using lat and lon
+        {
+            weatherNetworkDataSource.fetchFutureDataByCoordinates(preferredLocation[0].toDouble(),
+                preferredLocation[1].toDouble(),"minutely",units,"en")
+
+            weatherNetworkDataSource.fetchCurrentDataByCoordinates(preferredLocation[0].toDouble(),
+                preferredLocation[1].toDouble(),units,"en")
+
+        }
+
+        else{  //Means we are using location set up in app settings
+            fetchCurrentWeather(units,preferredLocation[0])
+
+            weatherNetworkDataSource.fetchFutureDataByCoordinates(currentWeatherDao.getWeatherLocationLat(),
+                currentWeatherDao.getWeatherLocationLon(),"minutely",units,"en")
+
+        }
+
+
     }
 
     private fun preserveCurrentWeather(currentWeather:CurrentWeatherEntry){

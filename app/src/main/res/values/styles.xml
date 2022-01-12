@@ -5,10 +5,12 @@
 
 
         <item name="android:navigationBarColor">@color/colorPrimaryAccent</item>
-        <item name="colorPrimary">@color/colorPrimaryAccent</item>
+        <item name="colorPrimary">#0000FF</item>
         <item name = "android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">#EEEEEE</item>
 
 
     </style>
+
+
 </resources>

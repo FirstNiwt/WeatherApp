@@ -26,4 +26,7 @@ interface CurrentWeatherDao {
     @Query("select dt from current_weather where keyId = $CURRENT_WEATHER_ID")
     fun getWeatherFetchTime():Int?
 
+    @Query("select name from current_weather where keyId = $CURRENT_WEATHER_ID")
+    fun getCityName():String?
+
 }

@@ -1,5 +1,6 @@
 package com.example.weatherapp.di
 
+import android.app.Application
 import android.content.Context
 import com.example.weatherapp.data.CurrentWeatherDao
 import com.example.weatherapp.data.FutureWeatherDao
@@ -13,6 +14,8 @@ import com.example.weatherapp.data.repository.ForecastRepository
 import com.example.weatherapp.data.repository.ForecastRepositoryImpl
 import com.example.weatherapp.ui.weather.current.CurrentWeatherViewModelFactory
 import com.example.weatherapp.ui.weather.weekly.DailyWeatherListFactory
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,8 +53,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideForecastRepositoryImpl(currentWeatherDao: CurrentWeatherDao,futureWeatherDao:FutureWeatherDao,weatherNetworkDataSource:
-    WeatherNetworkDataSource,locationProvider: LocationProvider) =
+    fun provideForecastRepositoryImpl(currentWeatherDao: CurrentWeatherDao,futureWeatherDao:FutureWeatherDao,
+        weatherNetworkDataSource: WeatherNetworkDataSource,locationProvider: LocationProvider) =
         ForecastRepositoryImpl(currentWeatherDao,futureWeatherDao, weatherNetworkDataSource,locationProvider)
 
     @Provides
@@ -75,7 +78,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLocationProviderImpl() = LocationProviderImpl()
+    fun provideFusedLocationProviderClient(baseApplication: Application): FusedLocationProviderClient =
+        LocationServices.getFusedLocationProviderClient(baseApplication)
+
+    @Provides
+    fun provideLocationProviderImpl(fusedLocationProviderClient: FusedLocationProviderClient,
+       @ApplicationContext app :Context) = LocationProviderImpl(fusedLocationProviderClient,app)
+
 
 
 

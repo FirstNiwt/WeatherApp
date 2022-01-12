@@ -38,4 +38,5 @@ abstract class NetworkModule {
     @Binds
     abstract fun provideLocationProvider(locationProviderImpl: LocationProviderImpl): LocationProvider
 
+
 }

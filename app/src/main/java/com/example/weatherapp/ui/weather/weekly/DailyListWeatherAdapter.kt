@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.weather.weekly
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -45,8 +46,10 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
     class DailyListWeatherAdapterViewHolder(private val binding: DailyWeatherItemBinding): RecyclerView.ViewHolder(binding.root) {
         var unitProvider: UnitProviderImpl = UnitProviderImpl(binding.root.context)
 
+        @SuppressLint("SimpleDateFormat")
         fun bindDailyListWeather(dailyWeather:Daily)
         {
+
             val simpleDateFormat = SimpleDateFormat("EEE d MMM")
 
             val date = Date(dailyWeather.dt*1000L)
