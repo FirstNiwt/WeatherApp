@@ -24,7 +24,15 @@ class LocationProviderImpl (private val fusedLocationProviderClient: FusedLocati
         val deviceLocationChanged = try{hasDeviceLocationChanged(lat,lon)
         }catch(e: LocationPermissionNotGrantedException) {false}
 
-        return (deviceLocationChanged || hasCustomLocationChanged(cityName))
+        val preferredLocation = getPreferredLocation()
+        val preferredLocationList:List<String> = preferredLocation.split(",")
+
+        return if(preferredLocationList.size == 1){
+            (deviceLocationChanged || hasCustomLocationChanged(cityName))
+        } else{
+            (deviceLocationChanged)
+        }
+
     }
 
     override suspend fun getPreferredLocation(): String {

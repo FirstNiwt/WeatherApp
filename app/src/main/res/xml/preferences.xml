@@ -45,7 +45,7 @@
         <SwitchPreference
             android:key="SHOW_ALERTS"
             android:title="Show weather alerts"
-            android:summary="Allow this app to notify you about special weather conditions"
+            android:summary="Enable to add alerts to the Home screen"
             android:defaultValue="false"
            />
     </PreferenceCategory>

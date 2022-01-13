@@ -106,6 +106,8 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
             showWindImage()
             setWindSpeed(it.wind.speed,unitProvider.getUnitType().toString())
 
+            binding.groupSmallInfo.visibility = View.VISIBLE
+
 
 
             })
