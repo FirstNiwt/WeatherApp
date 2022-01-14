@@ -10,18 +10,35 @@
 
     <TextView
         android:id="@+id/textView_cloudiness_text"
-        android:layout_width="87dp"
-        android:layout_height="34dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
         android:gravity="center_vertical"
-        android:text="Cloudiness:"
-        android:visibility="invisible"
+        android:text="Cloudiness: "
         android:textAlignment="center"
         android:textColor="@color/font_color"
-        app:layout_constraintStart_toEndOf="@+id/imageView_humidity"
-        app:layout_constraintTop_toBottomOf="@+id/textView_percitipation_text"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_cloudiness"
+        app:layout_constraintStart_toEndOf="@+id/imageView_cloudiness"
+        app:layout_constraintTop_toTopOf="@+id/imageView_cloudiness"
+        app:layout_constraintVertical_bias="0.466"
         tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/textView_cloudiness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_vertical"
+        android:textAlignment="viewStart"
+        android:textColor="@color/font_color"
+        android:textSize="@dimen/small_info_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_cloudiness_text"
+        app:layout_constraintStart_toEndOf="@+id/textView_cloudiness_text"
+        app:layout_constraintTop_toTopOf="@+id/textView_cloudiness_text"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="RtlCompat"
+        tools:text="11%" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_loading_current"
@@ -46,8 +63,8 @@
 
     <TextView
         android:id="@+id/textView_loading"
-        android:layout_width="168dp"
-        android:layout_height="19dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:text="@string/current_weather_detailed_loading_main"
         android:textAlignment="center"
@@ -70,9 +87,9 @@
 
     <TextView
         android:id="@+id/textView_temperature"
-        android:layout_width="144dp"
-        android:layout_height="116dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="13dp"
         android:fontFamily="@font/roboto"
@@ -129,16 +146,16 @@
 
     <TextView
         android:id="@+id/textView_wind_speed"
-        android:layout_width="52dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="88dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:gravity="center_vertical"
         android:textAlignment="viewStart"
         android:textColor="@color/font_color"
         android:textSize="@dimen/small_info_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_wind_text"
         app:layout_constraintStart_toEndOf="@+id/textView_wind_text"
-        app:layout_constraintTop_toBottomOf="@+id/textView_temperature"
+        app:layout_constraintTop_toTopOf="@+id/textView_wind_text"
         tools:ignore="RtlCompat"
         tools:text="19 km/h" />
 
@@ -150,40 +167,23 @@
         android:layout_marginTop="16dp"
         android:contentDescription="@string/current_weather_detailed_cloud_image_view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_percitipation_text"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_humidity"
         tools:src="@drawable/ic_cloud" />
 
     <TextView
         android:id="@+id/textView_humidity"
-        android:layout_width="40dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:gravity="center_vertical"
         android:textAlignment="viewStart"
         android:textColor="@color/font_color"
         android:textSize="@dimen/small_info_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_percitipation_text"
         app:layout_constraintStart_toEndOf="@+id/textView_percitipation_text"
-        app:layout_constraintTop_toBottomOf="@+id/textView_wind_speed"
+        app:layout_constraintTop_toTopOf="@+id/textView_percitipation_text"
         tools:ignore="RtlCompat"
         tools:text="92%" />
-
-    <TextView
-        android:id="@+id/textView_cloudiness"
-        android:layout_width="40dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/roboto"
-        android:gravity="center_vertical"
-        android:textAlignment="viewStart"
-        android:textColor="@color/font_color"
-        android:textSize="@dimen/small_info_text_size"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_cloudiness_text"
-        app:layout_constraintStart_toEndOf="@+id/textView_cloudiness_text"
-        app:layout_constraintTop_toBottomOf="@+id/textView_humidity"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="RtlCompat"
-        tools:text="11%" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_loading_hourly_forecast"
@@ -211,7 +211,7 @@
 
     <TextView
         android:id="@+id/textView_hourly_loading"
-        android:layout_width="55dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:text="@string/hourly_loading_text"
@@ -223,41 +223,38 @@
 
     <TextView
         android:id="@+id/textView_weatherdescription"
-        android:layout_width="253dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:gravity="center_horizontal|center_vertical"
         android:textAlignment="center"
         android:textColor="@color/font_color"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView_weather_type"
-        app:layout_constraintHorizontal_bias="0.931"
         app:layout_constraintStart_toStartOf="@+id/imageView_weather_type"
         app:layout_constraintTop_toBottomOf="@+id/imageView_weather_type"
-        app:layout_constraintVertical_bias="0.005"
         tools:text="Cloudy" />
 
     <TextView
         android:id="@+id/textView_percitipation_text"
-        android:layout_width="87dp"
-        android:layout_height="34dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
         android:gravity="center_vertical"
         android:text="Percitipation: "
         android:textAlignment="center"
         android:textColor="@color/font_color"
-        app:layout_constraintStart_toEndOf="@+id/imageView_humidity"
-        app:layout_constraintTop_toBottomOf="@+id/textView_wind_text"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_humidity"
+        app:layout_constraintStart_toEndOf="@+id/imageView_humidity"
+        app:layout_constraintTop_toTopOf="@+id/imageView_humidity"
         tools:ignore="RtlCompat" />
 
     <TextView
         android:id="@+id/textView_wind_text"
-        android:layout_width="45dp"
-        android:layout_height="34dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="88dp"
         android:gravity="center_vertical"
@@ -265,6 +262,7 @@
         android:textAlignment="center"
         android:textColor="@color/font_color"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_wind"
         app:layout_constraintStart_toEndOf="@+id/imageView_wind"
         app:layout_constraintTop_toBottomOf="@+id/textView_temperature"
         tools:ignore="RtlCompat" />
@@ -285,10 +283,10 @@
         android:layout_width="35dp"
         android:layout_height="34dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="32dp"
         android:contentDescription="@string/current_weather_detailed_wind_image_view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_temperature"
+        app:layout_constraintTop_toBottomOf="@+id/textView_sunset_text"
         tools:src="@drawable/ic_wind" />
 
     <ImageView
@@ -299,7 +297,7 @@
         android:layout_marginTop="16dp"
         android:contentDescription="@string/current_weather_detailed_humidity_image_view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_wind_text"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_wind"
         tools:src="@drawable/ic_singledrop" />
 
     <TextView

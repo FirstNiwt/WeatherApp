@@ -51,6 +51,7 @@ class HourlyWeatherAdapter(private var hourlyWeatherList: MutableList<Hourly>): 
             binding.hourlyWeatherTime.text = simpleDateFormat.format(date)
             setWeatherImage(hourlyWeather.weather[0].id)
             binding.hourlyWeatherTemperature.text = hourlyWeather.temp.roundToInt().toString() + "°" //TODO ADD PLACE HOLDER
+
             binding.textViewHumidityHourly.text = hourlyWeather.humidity.toString() + "%"  //TODO ADD PLACE HOLDER
 
         }

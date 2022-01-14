@@ -7,7 +7,7 @@ import com.example.weatherapp.data.repository.ForecastRepository
 import com.example.weatherapp.ui.weather.current.CurrentWeatherDetailedViewModel
 
 
-class DailyWeatherListFactory constructor(private val forecastRepository: ForecastRepository,private val unitProvider: UnitProvider):
+class DailyWeatherListViewModelFactory constructor(private val forecastRepository: ForecastRepository, private val unitProvider: UnitProvider):
     ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")

@@ -7,6 +7,8 @@
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/border.xml" value="0.3375" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/ic__cloudy.xml" value="0.1388888888888889" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/ic_baseline_calendar_view_week_24.xml" value="0.30520833333333336" />
+        <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/ic_baseline_keyboard_arrow_down_24.xml" value="0.23385416666666667" />
+        <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/ic_baseline_keyboard_arrow_up_24.xml" value="0.23385416666666667" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.3015625" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.3015625" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.20104166666666667" />
@@ -18,8 +20,10 @@
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/ic_singledrop.xml" value="0.2796875" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/ic_sunny_few_clouds.xml" value="0.2796875" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/recycler_view_items_border.xml" value="0.321875" />
+        <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/drawable/sharp_border.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/font/archivo_black.xml" value="0.3515625" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/alert_item.xml" value="0.32382246376811596" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/current_weather_detailed_fragment.xml" value="0.33" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/current_weather_fragment.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/murzy/WeatherApp/app/src/main/res/layout/daily_weather_item.xml" value="0.67" />
@@ -54,7 +58,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.9" />
+        <option name="scale" value="0.32382246376811596" />
       </ProjectState>
     </option>
   </component>

@@ -8,11 +8,12 @@
     tools:context=".ui.alerts.AlertsFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView_no_alerts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Currently there are no alerts for your location"
         android:textColor="@color/font_color"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -20,8 +21,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recyclerView"
         android:layout_width="409dp"
         android:layout_height="730dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:padding="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

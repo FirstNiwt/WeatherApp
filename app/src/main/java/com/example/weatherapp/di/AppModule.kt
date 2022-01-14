@@ -12,8 +12,10 @@ import com.example.weatherapp.data.provider.UnitProvider
 import com.example.weatherapp.data.provider.UnitProviderImpl
 import com.example.weatherapp.data.repository.ForecastRepository
 import com.example.weatherapp.data.repository.ForecastRepositoryImpl
+import com.example.weatherapp.ui.alerts.AlertsViewModel
+import com.example.weatherapp.ui.alerts.AlertsViewModelFactory
 import com.example.weatherapp.ui.weather.current.CurrentWeatherViewModelFactory
-import com.example.weatherapp.ui.weather.weekly.DailyWeatherListFactory
+import com.example.weatherapp.ui.weather.weekly.DailyWeatherListViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.Module
@@ -70,7 +72,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDailyWeatherListViewModelFactory(forecastRepository: ForecastRepository, unitProvider:UnitProvider)
-            = DailyWeatherListFactory(forecastRepository,unitProvider)
+            = DailyWeatherListViewModelFactory(forecastRepository,unitProvider)
 
     @Provides
     @Singleton
@@ -85,6 +87,10 @@ object AppModule {
     fun provideLocationProviderImpl(fusedLocationProviderClient: FusedLocationProviderClient,
        @ApplicationContext app :Context) = LocationProviderImpl(fusedLocationProviderClient,app)
 
+    @Provides
+    @Singleton
+    fun provideAlertsViewModelFactory(forecastRepository: ForecastRepository,unitProvider: UnitProvider)=
+        AlertsViewModelFactory(forecastRepository,unitProvider)
 
 
 

@@ -1,7 +1,7 @@
 package com.example.weatherapp.ui.weather.weekly
 
 import android.annotation.SuppressLint
-import android.content.res.Resources
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -50,7 +50,7 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
         fun bindDailyListWeather(dailyWeather:Daily)
         {
 
-            val simpleDateFormat = SimpleDateFormat("EEE d MMM")
+            val simpleDateFormat = SimpleDateFormat("EEE, d MMM",Locale.ENGLISH)
 
             val date = Date(dailyWeather.dt*1000L)
 
@@ -61,7 +61,7 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
 
             setWindSpeed(dailyWeather.windSpeed,unitProvider.getUnitType().toString())
 
-            binding.textViewWeeklyDescription.text = "here description" // TODO CREATE FUNCTION FOR SETTING THIS
+            binding.textViewWeeklyDescription.text = "xxx" // TODO CREATE FUNCTION FOR SETTING THIS
 
             binding.weeklyWeatherDate.text = simpleDateFormat.format(date)
             binding.ImageViewHumidity.setImageResource(R.drawable.ic_singledrop)
