@@ -50,6 +50,10 @@ class LocationProviderImpl (private val fusedLocationProviderClient: FusedLocati
         return "${getCustomLocationName()}"
     }
 
+    override fun isHomeAlert():Boolean
+    {
+        return preferences.getBoolean("SHOW_ALERTS",true)
+    }
     private suspend fun hasDeviceLocationChanged(lat:Double, lon:Double):Boolean{
         if(!isUsingDeviceLocation())
             return false
@@ -72,6 +76,7 @@ class LocationProviderImpl (private val fusedLocationProviderClient: FusedLocati
     private fun getCustomLocationName():String?{
         return preferences.getString(CUSTOM_LOCATION,null)
     }
+
 
     private fun isUsingDeviceLocation():Boolean{
         return preferences.getBoolean(USE_DEVICE_LOCATION,true)

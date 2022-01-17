@@ -10,5 +10,5 @@ class HomeScreenViewModel(private val forecastRepository: ForecastRepository, un
 
         private val units:String =  unitProvider.getUnitType().toString()
         val currentWeather by lazyDeferred { forecastRepository.getCurrentWeather(units)}
-
+        val futureWeather by lazyDeferred{forecastRepository.getFutureWeather(units)}
 }

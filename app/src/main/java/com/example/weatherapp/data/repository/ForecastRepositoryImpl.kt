@@ -68,11 +68,11 @@ class ForecastRepositoryImpl constructor(
             || locationProvider.hasLocationChanged(lastLat,lastLon,cityName)
                 )
         {
-            fetchFutureWeather(units)
+            //fetchFutureWeather(units)
 
         }
         //if(isFetchNeeded(lastFetchTime))
-            fetchFutureWeather(units)
+            //fetchFutureWeather(units)
 
     }
 

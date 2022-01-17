@@ -33,6 +33,6 @@
     <string name="current_weather_detailed_cloud_image_view">picture of cloud</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="update_time_place_holder">Updated at %1$s</string>
 
 </resources>
