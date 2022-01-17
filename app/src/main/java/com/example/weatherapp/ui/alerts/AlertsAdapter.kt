@@ -44,7 +44,6 @@ class AlertsAdapter(private var alertsList: MutableList<Alert>): RecyclerView.Ad
 
         init{
 
-
             binding.constraintLayoutMain.setOnClickListener(this)
         }
 

@@ -3,17 +3,20 @@ package com.example.weatherapp.ui.weather.weekly
 import android.annotation.SuppressLint
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.data.db.entity.Daily
 import com.example.weatherapp.data.provider.UnitProviderImpl
 import com.example.weatherapp.databinding.DailyWeatherItemBinding
+import com.example.weatherapp.databinding.FragmentDailyWeatherListBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
 class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>): RecyclerView.Adapter<DailyListWeatherAdapter.DailyListWeatherAdapterViewHolder>() {
+
 
 
     override fun onCreateViewHolder(
@@ -27,6 +30,8 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
         val shouldAttachToParentImmediately = false
 
         val view = DailyWeatherItemBinding.inflate(inflater,parent,shouldAttachToParentImmediately)
+
+
         return DailyListWeatherAdapterViewHolder(view)
     }
 
@@ -43,20 +48,32 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
         return dailyWeatherList.size
     }
 
-    class DailyListWeatherAdapterViewHolder(private val binding: DailyWeatherItemBinding): RecyclerView.ViewHolder(binding.root) {
+    class DailyListWeatherAdapterViewHolder(private val binding: DailyWeatherItemBinding): RecyclerView.ViewHolder(binding.root),
+        View.OnClickListener {
         var unitProvider: UnitProviderImpl = UnitProviderImpl(binding.root.context)
-
+        init{
+            binding.constraintLayoutDailyItem.setOnClickListener(this)
+        }
         @SuppressLint("SimpleDateFormat")
         fun bindDailyListWeather(dailyWeather:Daily)
         {
+            val isExpanded = dailyWeather.expanded
+            if(!isExpanded) {
 
+                binding.expandableLayoutDaily.visibility = View.GONE
+            }
             val simpleDateFormat = SimpleDateFormat("EEE, d MMM",Locale.ENGLISH)
 
             val date = Date(dailyWeather.dt*1000L)
 
+
             binding.textViewTemperatureWeekly.text = dailyWeather.temp.day.roundToInt().toString() + "°"  //TODO ADD PLACE HOLDER
             binding.textViewWeeklyHumidity.text = dailyWeather.humidity.toString() + "%"  //TODO ADD PLACE HOLDER
             binding.textViewWeeklyCloudiness.text = dailyWeather.clouds.toString() + "%" //TODO ADD PLACE HOLDER
+            binding.textViewFeelsLike.text = dailyWeather.feels_like.day.roundToInt().toString() + "°"
+            binding.textViewPressure.text = dailyWeather.pressure.toString() + " hPa"
+            binding.textViewDailyPrecipitation.text = dailyWeather.rain.toString() + " mm"
+            binding.textViewUvIndex.text = dailyWeather.uvi.toString() //TODO Create fucntion for setting this
 
 
             setWindSpeed(dailyWeather.windSpeed,unitProvider.getUnitType().toString())
@@ -70,6 +87,21 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
             setWeatherImage(dailyWeather.weather[0].id)
 
 
+        }
+
+        override fun onClick(v:View?) {
+
+            if(binding.expandableLayoutDaily.visibility==View.GONE)
+            {
+                binding.expandableLayoutDaily.visibility = View.VISIBLE
+                binding.imageViewArrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24)
+            }
+
+            else
+            {
+                binding.expandableLayoutDaily.visibility = View.GONE
+                binding.imageViewArrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_24)
+            }
         }
 
 

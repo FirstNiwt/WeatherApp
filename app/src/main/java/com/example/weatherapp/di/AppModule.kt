@@ -14,6 +14,7 @@ import com.example.weatherapp.data.repository.ForecastRepository
 import com.example.weatherapp.data.repository.ForecastRepositoryImpl
 import com.example.weatherapp.ui.alerts.AlertsViewModel
 import com.example.weatherapp.ui.alerts.AlertsViewModelFactory
+import com.example.weatherapp.ui.home.HomeScreenViewModelFactory
 import com.example.weatherapp.ui.weather.current.CurrentWeatherViewModelFactory
 import com.example.weatherapp.ui.weather.weekly.DailyWeatherListViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -91,6 +92,11 @@ object AppModule {
     @Singleton
     fun provideAlertsViewModelFactory(forecastRepository: ForecastRepository,unitProvider: UnitProvider)=
         AlertsViewModelFactory(forecastRepository,unitProvider)
+
+    @Provides
+    @Singleton
+    fun provideHomeScreenViewModelFactory(forecastRepository: ForecastRepository,unitProvider: UnitProvider)=
+        HomeScreenViewModelFactory(forecastRepository,unitProvider)
 
 
 

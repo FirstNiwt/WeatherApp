@@ -46,8 +46,7 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
     private lateinit var viewModel: CurrentWeatherDetailedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = null
-        (activity as? AppCompatActivity)?.supportActionBar?.title = null
+
         super.onCreate(savedInstanceState)
 
     }

@@ -7,39 +7,48 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.example.weatherapp.data.provider.UnitProvider
 import com.example.weatherapp.databinding.FragmentHomeScreenBinding
+import com.example.weatherapp.ui.base.ScopedFragment
+import com.example.weatherapp.ui.settings.SettingsFragment
+import com.example.weatherapp.ui.weather.current.CurrentWeatherDetailedViewModel
+import com.example.weatherapp.ui.weather.current.CurrentWeatherViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
+import javax.inject.Inject
+import kotlin.math.roundToInt
+import android.R
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+@AndroidEntryPoint
+class HomeScreenFragment : ScopedFragment(){
+    @Inject
+    lateinit var viewModelFactory: HomeScreenViewModelFactory
+    @Inject
+    lateinit var unitProvider: UnitProvider
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeScreenFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class HomeScreenFragment : Fragment() {
+
 
     private var _binding: FragmentHomeScreenBinding? = null
     private val binding get() = _binding!!
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private lateinit var viewModel: HomeScreenViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.constraintLayoutMain.setOnClickListener {
+            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToCurrentWeatherDetailedFragment()
+            findNavController().navigate(action)
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateView(
@@ -51,33 +60,57 @@ class HomeScreenFragment : Fragment() {
         return binding.root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this, viewModelFactory)[HomeScreenViewModel::class.java]
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeScreenFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeScreenFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+        bindUI()
+
     }
 
+    private fun bindUI() = launch {
+
+        val currentWeather = viewModel.currentWeather.await()
 
 
+        currentWeather.observe(this@HomeScreenFragment, Observer{
 
+            if (it == null) {
+                Toast.makeText(context, "Not initialized", Toast.LENGTH_SHORT).show()
+                return@Observer
+
+            }
+
+            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH)
+            val simpleTimeFormat = SimpleDateFormat("HH:mm",Locale.ENGLISH)
+            val date = Date(it.dt*1000L)
+            val time = Date((it.dt + it.timezone - 3600)*1000L)
+
+            (activity as? AppCompatActivity)?.supportActionBar?.subtitle = simpleDateFormat.format(date)
+            (activity as? AppCompatActivity)?.supportActionBar?.title = it.name
+            (activity as? AppCompatActivity)?.supportActionBar?.show()
+
+
+            binding.textViewHomeTemp.text = it.main.temp.roundToInt().toString() + "°"
+            binding.textViewHomeTempMax.text = it.main.tempMax.roundToInt().toString() +"°"
+            binding.textViewHomeTempMin.text = it.main.tempMin.roundToInt().toString() + "°"
+            binding.textViewHomeUpdateTime.text = "Updated at "+ simpleTimeFormat.format(time)
+            binding.imageView2.visibility = View.VISIBLE
+            binding.imageView5.visibility = View.VISIBLE
+            binding.textViewHomeDescription.text = "Partly Cloudy" //TODO add setter for this
+
+            //TODO ADD LOADING FOR THIS
+
+
+        })
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
+
 }

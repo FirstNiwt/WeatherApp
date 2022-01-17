@@ -53,7 +53,7 @@ class ForecastRepositoryImpl constructor(
     }
 
     private suspend fun initWeatherData(units: String) {
-
+        fetchFutureWeather(units)
         val lastLat:Double? = currentWeatherDao.getWeatherLocationLat()
         val lastLon:Double? = currentWeatherDao.getWeatherLocationLon()
         val lastFetchSeconds:Int? = currentWeatherDao.getWeatherFetchTime()
@@ -71,7 +71,7 @@ class ForecastRepositoryImpl constructor(
             fetchFutureWeather(units)
 
         }
-        if(isFetchNeeded(lastFetchTime))
+        //if(isFetchNeeded(lastFetchTime))
             fetchFutureWeather(units)
 
     }

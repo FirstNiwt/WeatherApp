@@ -10,7 +10,7 @@ import com.example.weatherapp.data.db.entity.FutureWeatherEntry
 @Database(
 
     entities = [CurrentWeatherEntry::class,FutureWeatherEntry::class],
-    version = 4
+    version = 7
 )
 
 @TypeConverters(Converters::class)

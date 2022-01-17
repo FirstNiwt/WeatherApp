@@ -20,6 +20,7 @@ import java.lang.reflect.Method
 import android.R.menu
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Handler
@@ -31,6 +32,7 @@ import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.preference.PreferenceManager
 import com.bumptech.glide.load.engine.Resource
 import com.example.weatherapp.R
 import com.example.weatherapp.data.network.WeatherNetworkDataSource
@@ -40,6 +42,9 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.checkerframework.checker.units.qual.m
 import javax.inject.Inject
 
@@ -51,6 +56,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    @Inject
+    lateinit var forecastRepository: ForecastRepository
 
 
     private val locationCallback = object: LocationCallback(){
@@ -67,6 +74,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setSupportActionBar(binding.topMenu)
         setContentView(binding.root)
+
+        GlobalScope.launch(Dispatchers.IO) {
+            forecastRepository.getFutureWeather("METRIC")
+
+        }
 
 
         val navHostFragment = supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
@@ -104,6 +116,31 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController,null)
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+
+
+            R.id.auto_localisation -> {
+                val pref = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+                Toast.makeText(applicationContext, "Location Updated", Toast.LENGTH_LONG).show()
+                val editor = pref.edit()
+                editor.putBoolean("USE_DEVICE_LOCATION", true)
+                editor.putString("CUSTOM_LOCATION", "New York")
+                editor.apply()
+
+                GlobalScope.launch(Dispatchers.IO) {
+                    forecastRepository.getCurrentWeather(pref.getString("UNIT_SYSTEM", "METRIC")!!)
+                    forecastRepository.getFutureWeather(pref.getString("UNIT_SYSTEM", "METRIC")!!)
+
+                }
+
+            }
+        }
+            return super.onOptionsItemSelected(item)
+
     }
 
     private fun requestLocationPermission(){

@@ -25,8 +25,10 @@ data class FutureWeatherEntry(
     @PrimaryKey(autoGenerate = false)
     var keyId: Int = FUTURE_WEATHER_ID
 
-    constructor() :this(mutableListOf(Daily(0,0,0,0.0,0,0.0,
-             Temp(0.0),0.0,0,0,mutableListOf(Weather("",0)),0.0)),
+    constructor() :this(mutableListOf(Daily(0,0,0,0.0,
+             FeelsLike(0.0),0,0.0,0.0,
+             Temp(0.0),0.0,0,0,
+             mutableListOf(Weather("",0)),0.0)),
              mutableListOf(Hourly(0,0,0,0.0,0,0.0,
              mutableListOf(Weather("",0)),0.0)),0.0,0.0,"",0,
              mutableListOf(Alert("",0,0,"")))

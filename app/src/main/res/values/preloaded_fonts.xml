@@ -2,7 +2,9 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/archivo_black</item>
+        <item>@font/kite_one</item>
         <item>@font/roboto</item>
         <item>@font/roboto_slab</item>
+        <item>@font/the_girl_next_door</item>
     </array>
 </resources>
