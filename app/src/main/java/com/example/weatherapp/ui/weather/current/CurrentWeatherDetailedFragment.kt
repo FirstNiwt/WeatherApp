@@ -11,13 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.data.db.entity.Hourly
-import com.example.weatherapp.data.network.OpenWeatherApiService
-import com.example.weatherapp.data.network.WeatherNetworkDataSourceImpl
-import com.example.weatherapp.data.provider.LocationProvider
-import com.example.weatherapp.data.provider.LocationProviderImpl
-import com.example.weatherapp.data.provider.PreferenceProvider
 import com.example.weatherapp.data.provider.UnitProvider
-import com.example.weatherapp.data.repository.ForecastRepository
 import com.example.weatherapp.databinding.CurrentWeatherDetailedFragmentBinding
 import com.example.weatherapp.ui.base.ScopedFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,17 +33,10 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
     private val binding get() = _binding!!
     private var linearLayoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
 
-    companion object {
-        fun newInstance() = CurrentWeatherDetailedFragment()
-    }
+
 
     private lateinit var viewModel: CurrentWeatherDetailedViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +50,6 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[CurrentWeatherDetailedViewModel::class.java]
-
 
        bindUI()
 
@@ -81,8 +67,23 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
 
 
             }
-            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH)
-            val date = Date(it.dt*1000L)
+
+            val date = Date(System.currentTimeMillis() + (it.timezone - 3600) * 1000L)
+            val sunset = (Date(it.sys.sunset * 1000L)).toInstant()
+            val sunrise = (Date(it.sys.sunrise * 1000L)).toInstant()
+            val sunsetDate = Date((it.sys.sunset + it.timezone -3600) * 1000L)
+            val sunriseDate = Date((it.sys.sunrise + it.timezone -3600) * 1000L)
+
+            val dateInstant = date.toInstant()
+
+            val isNight:Boolean = dateInstant.isAfter(sunset) || dateInstant.isBefore(sunrise)
+
+
+            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy,  HH:mm", Locale.ENGLISH)
+            val simpleTimeFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
+
+            val sunsetTime = simpleTimeFormat.format(sunsetDate)
+            val sunriseTime = simpleTimeFormat.format(sunriseDate)
 
             (activity as? AppCompatActivity)?.supportActionBar?.subtitle = simpleDateFormat.format(date)
             (activity as? AppCompatActivity)?.supportActionBar?.title = it.name
@@ -91,8 +92,8 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
             binding.groupLoadingCurrent.visibility = View.GONE
 
 
-            setWeatherDescription(0)
-            setWeatherImage(it.weather[0].id)
+            setWeatherDescription(it.weather[0].description)
+            setWeatherImage(it.weather[0].id,isNight)
             setTemperature(it.main.temp)
 
             showHumidityImage()
@@ -106,7 +107,8 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
             setWindSpeed(it.wind.speed,unitProvider.getUnitType().toString())
 
             binding.groupSmallInfo.visibility = View.VISIBLE
-
+            binding.textViewSunriseTime.text = sunriseTime
+            binding.textViewSunsetTime.text = sunsetTime
 
 
             })
@@ -119,15 +121,16 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
             }
 
 
-            //binding.textViewHourlyLoading.text = it.toString()
+
             binding.recyclerViewHourly.layoutManager = linearLayoutManager
 
             val hourlyWeatherMutableList:MutableList<Hourly> = it.hourly.toMutableList()
 
             hourlyWeatherMutableList.removeFirst()
+            val hourlyTrim = hourlyWeatherMutableList.take(8).toMutableList()
 
-
-            hourlyAdapter = HourlyWeatherAdapter(hourlyWeatherMutableList)
+            hourlyAdapter = HourlyWeatherAdapter(hourlyTrim,it.daily[0].sunrise,it.daily[0].sunset,
+                it.timezoneOffset)
             binding.recyclerViewHourly.adapter = hourlyAdapter
             binding.textViewHourlyForecast.visibility = View.VISIBLE
         })
@@ -136,8 +139,9 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
 
 
 
-    private fun setWeatherImage(id:Int)
+    private fun setWeatherImage(id:Int,isNight:Boolean)
     {
+        if(!isNight)
         when(id){
 
             in 200..232 -> binding.imageViewWeatherType.setImageResource(R.drawable.ic_storm)
@@ -150,6 +154,17 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
 
         }
 
+        else{
+            when(id) {
+                in 200..232 -> binding.imageViewWeatherType.setImageResource(R.drawable.ic_storm_at_night)
+                in 300..531 -> binding.imageViewWeatherType.setImageResource(R.drawable.ic_night_with_rain)
+                in 600..622 -> binding.imageViewWeatherType.setImageResource(R.drawable.ic_storm_at_night)
+                in 700..750 -> binding.imageViewWeatherType.setImageResource(R.drawable.ic_fog)
+                800 -> binding.imageViewWeatherType.setImageResource(R.drawable.ic_moon)
+                801 -> binding.imageViewWeatherType.setImageResource(R.drawable.ic_moon)
+                in 802..804 -> binding.imageViewWeatherType.setImageResource(R.drawable.ic_moon)
+            }
+        }
     }
 
     private fun showHumidityImage()
@@ -203,17 +218,10 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
 
 
 
-
-
-    private fun setWeatherDescription(id:Int)
+    private fun setWeatherDescription(description:String)
     {
-        when(id){
 
-            //TODO ADD STRINGS DESCRIBING WEATHER BASED ON WEATHER ID AND SET IT
-
-        }
-
-        binding.textViewWeatherdescription.text  = "Cloudy" //TODO HARD CODED
+        binding.textViewWeatherdescription.text  = description.replaceFirstChar{it.uppercase()}
 
     }
 

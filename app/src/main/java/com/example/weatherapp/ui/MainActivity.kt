@@ -47,6 +47,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.checkerframework.checker.units.qual.m
 import javax.inject.Inject
+import android.content.Intent
+
+
+
 
 private const val MY_PERMISSION_ACCESS_COARSE_LOCATION = 1
 
@@ -75,10 +79,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.topMenu)
         setContentView(binding.root)
 
-        GlobalScope.launch(Dispatchers.IO) {
-            forecastRepository.getFutureWeather("METRIC")
 
-        }
 
 
         val navHostFragment = supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
@@ -136,6 +137,9 @@ class MainActivity : AppCompatActivity() {
                     forecastRepository.getFutureWeather(pref.getString("UNIT_SYSTEM", "METRIC")!!)
 
                 }
+                val intent = intent
+                finish()
+                startActivity(intent)
 
             }
         }

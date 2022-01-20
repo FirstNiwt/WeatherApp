@@ -8,10 +8,7 @@ import com.example.weatherapp.data.db.entity.CurrentWeatherEntry
 import com.example.weatherapp.data.db.entity.FutureWeatherEntry
 import com.example.weatherapp.data.network.WeatherNetworkDataSource
 import com.example.weatherapp.data.provider.LocationProvider
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.time.Instant
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
@@ -53,7 +50,6 @@ class ForecastRepositoryImpl constructor(
     }
 
     private suspend fun initWeatherData(units: String) {
-        fetchFutureWeather(units)
         val lastLat:Double? = currentWeatherDao.getWeatherLocationLat()
         val lastLon:Double? = currentWeatherDao.getWeatherLocationLon()
         val lastFetchSeconds:Int? = currentWeatherDao.getWeatherFetchTime()
@@ -68,11 +64,12 @@ class ForecastRepositoryImpl constructor(
             || locationProvider.hasLocationChanged(lastLat,lastLon,cityName)
                 )
         {
-            //fetchFutureWeather(units)
-
+            fetchFutureWeather(units)
+            return
         }
-        //if(isFetchNeeded(lastFetchTime))
-            //fetchFutureWeather(units)
+
+        if(isFetchNeeded(lastFetchTime))
+            fetchFutureWeather(units)
 
     }
 
@@ -106,6 +103,7 @@ class ForecastRepositoryImpl constructor(
         else{  //Means we are using location set up in app settings
             fetchCurrentWeather(units,preferredLocation[0])
 
+            delay(500L)
             weatherNetworkDataSource.fetchFutureDataByCoordinates(currentWeatherDao.getWeatherLocationLat(),
                 currentWeatherDao.getWeatherLocationLon(),"minutely",units,"en")
 
@@ -121,6 +119,8 @@ class ForecastRepositoryImpl constructor(
             currentWeatherDao.insertWeatherData(currentWeather)
 
         }
+
+
 
     }
     private fun preserveFutureWeather(futureWeather:FutureWeatherEntry){

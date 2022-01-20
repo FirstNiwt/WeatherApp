@@ -90,8 +90,8 @@ class AlertsFragment : ScopedFragment() {
                 Toast.makeText(context, "Not initialized", Toast.LENGTH_SHORT).show()
                 return@Observer
             }
-            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH)
-            val date = Date(it.daily[0].dt*1000L)
+            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy,  HH:mm", Locale.ENGLISH)
+            val date = Date(System.currentTimeMillis() + (it.timezoneOffset - 3600) * 1000L)
 
             (activity as? AppCompatActivity)?.supportActionBar?.subtitle = simpleDateFormat.format(date)
             (activity as? AppCompatActivity)?.supportActionBar?.title = cityName

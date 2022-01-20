@@ -21,6 +21,8 @@
     <string name="cloudiness_place_holder">%1$d%%</string>
     <string name="temperature_place_holder">%1$d°</string>
     <string name="wind_speed_place_holder_metric">%1$d km/h</string>
+    <string name="pressure_place_holder">%1$d mb</string>
+    <string name= "precipitation_place_holder">%1$s mm</string>
     <string name="wind_speed_place_holder_imperial">%1$d mi/h</string>
 
     <string name="current_weather_item_description">current weather description</string>
@@ -35,4 +37,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="update_time_place_holder">Updated at %1$s</string>
 
+    //UV INDEX STRINGS
+    <string name= "uv_low">Low</string>
+    <string name= "uv_moderate">Moderate</string>
+    <string name= "uv_high">High</string>
+    <string name= "uv_very_high">Very High</string>
+    <string name= "uv_extreme">Extreme</string>
 </resources>

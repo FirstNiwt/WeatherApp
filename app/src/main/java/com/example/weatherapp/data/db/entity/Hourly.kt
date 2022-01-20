@@ -12,5 +12,8 @@ data class Hourly(
     val temp: Double,
     val weather: List<Weather>,
     @SerializedName("wind_speed")
-    val windSpeed: Double
+    val windSpeed: Double,
+    var sunrise:Int = 0,
+    var sunset:Int = 0,
+    var timezone:Int = 0
 )

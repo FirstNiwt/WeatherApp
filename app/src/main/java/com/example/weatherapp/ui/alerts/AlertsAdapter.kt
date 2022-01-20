@@ -49,7 +49,8 @@ class AlertsAdapter(private var alertsList: MutableList<Alert>): RecyclerView.Ad
 
         override fun onClick(v:View?) {
 
-            if(binding.expandableLayout.visibility == View.GONE)
+
+            if(binding.expandableLayout.visibility == View.GONE && binding.textViewDescription.text != "")
             {
                 binding.expandableLayout.visibility = View.VISIBLE
 
@@ -62,35 +63,35 @@ class AlertsAdapter(private var alertsList: MutableList<Alert>): RecyclerView.Ad
             }
         }
 
-
         fun bindAlertItem(alert:Alert)
         {
 
 
-            val isExpanded = alert.expanded
-            if(!isExpanded) {
+            binding.expandableLayout.visibility = View.GONE
 
-                binding.expandableLayout.visibility = View.GONE
-            }
+            bindStartAndEndDate(alert.start,alert.end)
+            bindDescriptions(alert.event,alert.description)
+
+        }
+
+
+        private fun bindStartAndEndDate(start:Int,end:Int)
+        {
             val simpleDateFormat = SimpleDateFormat("EEE, HH:mm",Locale.ENGLISH)
 
-
-
-
-            val timeStart = Date(alert.start*1000L)
-            val timeEnd = Date(alert.end*1000L)
+            val timeStart = Date(start*1000L)
+            val timeEnd = Date(end*1000L)
 
             binding.textViewAlertStartTime.text = simpleDateFormat.format(timeStart)
             binding.textViewAlertEndTime.text = simpleDateFormat.format(timeEnd)
 
-            binding.textViewEventShortDesc.text = alert.event.replaceFirstChar{it.uppercase()}
-            binding.textViewDescription.text = alert.description
-
-
-
-
         }
 
+        private fun bindDescriptions(shortDesc:String, longDesc:String)
+        {
+            binding.textViewEventShortDesc.text = shortDesc.replaceFirstChar{it.uppercase()}
+            binding.textViewDescription.text = longDesc
+        }
 
     }
 

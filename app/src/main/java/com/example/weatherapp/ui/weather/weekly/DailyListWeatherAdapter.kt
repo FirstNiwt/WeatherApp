@@ -10,12 +10,12 @@ import com.example.weatherapp.R
 import com.example.weatherapp.data.db.entity.Daily
 import com.example.weatherapp.data.provider.UnitProviderImpl
 import com.example.weatherapp.databinding.DailyWeatherItemBinding
-import com.example.weatherapp.databinding.FragmentDailyWeatherListBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
 class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>): RecyclerView.Adapter<DailyListWeatherAdapter.DailyListWeatherAdapterViewHolder>() {
+
 
 
 
@@ -54,6 +54,7 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
         init{
             binding.constraintLayoutDailyItem.setOnClickListener(this)
         }
+
         @SuppressLint("SimpleDateFormat")
         fun bindDailyListWeather(dailyWeather:Daily)
         {
@@ -62,28 +63,23 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
 
                 binding.expandableLayoutDaily.visibility = View.GONE
             }
-            val simpleDateFormat = SimpleDateFormat("EEE, d MMM",Locale.ENGLISH)
 
             val date = Date(dailyWeather.dt*1000L)
 
 
-            binding.textViewTemperatureWeekly.text = dailyWeather.temp.day.roundToInt().toString() + "°"  //TODO ADD PLACE HOLDER
-            binding.textViewWeeklyHumidity.text = dailyWeather.humidity.toString() + "%"  //TODO ADD PLACE HOLDER
-            binding.textViewWeeklyCloudiness.text = dailyWeather.clouds.toString() + "%" //TODO ADD PLACE HOLDER
-            binding.textViewFeelsLike.text = dailyWeather.feels_like.day.roundToInt().toString() + "°"
-            binding.textViewPressure.text = dailyWeather.pressure.toString() + " hPa"
-            binding.textViewDailyPrecipitation.text = dailyWeather.rain.toString() + " mm"
-            binding.textViewUvIndex.text = dailyWeather.uvi.toString() //TODO Create fucntion for setting this
-
+            setTemperature(dailyWeather.temp.day)
+            setCloudiness(dailyWeather.clouds)
+            setHumidity(dailyWeather.humidity)
+            setFeelsLikeTemp(dailyWeather.feels_like.day)
+            setPressure(dailyWeather.pressure)
+            setPrecipitation(dailyWeather.rain,dailyWeather.snow)
+            setUvIndex(dailyWeather.uvi.roundToInt())
 
             setWindSpeed(dailyWeather.windSpeed,unitProvider.getUnitType().toString())
+            setDescription(dailyWeather.weather[0].description)
+            setDate(date)
 
-            binding.textViewWeeklyDescription.text = "xxx" // TODO CREATE FUNCTION FOR SETTING THIS
-
-            binding.weeklyWeatherDate.text = simpleDateFormat.format(date)
-            binding.ImageViewHumidity.setImageResource(R.drawable.ic_singledrop)
-            binding.imageViewWindDaily.setImageResource(R.drawable.ic_wind)
-            binding.imageViewCloudinessDaily.setImageResource(R.drawable.ic_cloud)
+            setSmallWeatherImages()
             setWeatherImage(dailyWeather.weather[0].id)
 
 
@@ -104,6 +100,17 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
             }
         }
 
+        private fun setSmallWeatherImages()
+        {
+            binding.ImageViewHumidity.setImageResource(R.drawable.ic_singledrop)
+            binding.imageViewWindDaily.setImageResource(R.drawable.ic_wind)
+            binding.imageViewCloudinessDaily.setImageResource(R.drawable.ic_cloud)
+
+        }
+        private fun setDescription(description:String)
+        {
+            binding.textViewWeeklyDescription.text = description.replaceFirstChar{it.uppercase()}
+        }
 
         private fun setWindSpeed(windSpeed:Double,units:String)
         {
@@ -120,6 +127,59 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
                 )
             }
         }
+        private fun setDate(date:Date){
+            val simpleDateFormat = SimpleDateFormat("EEE, d MMM",Locale.ENGLISH)
+            binding.weeklyWeatherDate.text = simpleDateFormat.format(date)
+        }
+        private fun setTemperature(temp: Double){
+            binding.textViewTemperatureWeekly.text = String.format(binding.root.context
+                .getString(R.string.temperature_place_holder), temp.roundToInt())
+        }
+
+        private fun setCloudiness(cloud: Int){
+            binding.textViewWeeklyCloudiness.text = String.format(binding.root.context
+                .getString(R.string.cloudiness_place_holder), cloud)
+        }
+        private fun setHumidity(humidityValue:Int)
+        {
+            binding.textViewWeeklyHumidity.text = String.format(binding.root.context.
+            getString(R.string.humidity_place_holder), humidityValue)
+
+        }
+
+        private fun setFeelsLikeTemp(temp: Double){
+            binding.textViewFeelsLike.text = String.format(binding.root.context
+                .getString(R.string.temperature_place_holder), temp.roundToInt())
+        }
+
+        private fun setPressure(pressure:Int){
+            binding.textViewPressure.text = String.format(binding.root.context
+                .getString(R.string.pressure_place_holder),pressure)
+        }
+
+        private fun setPrecipitation(precipitationRain: Double,precipitationSnow:Double){
+            if(precipitationRain>precipitationSnow)
+                binding.textViewDailyPrecipitation.text = String.format(binding.root.context
+                    .getString(R.string.precipitation_place_holder),precipitationRain)
+
+            else {
+                binding.textViewDailyPrecipitation.text = String.format(binding.root.context
+                    .getString(R.string.precipitation_place_holder), precipitationSnow)
+            }
+        }
+        private fun setUvIndex(uv:Int){
+
+            when(uv)
+            {
+                in 0..2 -> binding.textViewUvIndex.text = binding.root.context.getString(R.string.uv_low)
+                in 3..5 -> binding.textViewUvIndex.text = binding.root.context.getString(R.string.uv_moderate)
+                in 6..7 -> binding.textViewUvIndex.text = binding.root.context.getString(R.string.uv_high)
+                in 8..10 -> binding.textViewUvIndex.text = binding.root.context.getString(R.string.uv_very_high)
+                in 11..20 -> binding.textViewUvIndex.text = binding.root.context.getString(R.string.uv_extreme)
+            }
+
+        }
+
 
         private fun setWeatherImage(id:Int)
         {
