@@ -1,8 +1,8 @@
 <resources>
 
     //ACTIVITY MAIN
-    <string name="app_name">WeatherApp</string>
     <string name="app_title">Weather App</string>
+    <string name = "app_name">Weather App </string>
     //TOP APP BAR
     <string name="auto_localisation_desc">automatic localisation</string>
     <string name="localisation">localisation</string>
@@ -14,6 +14,12 @@
     <string name="settings">Settings</string>
     <string name="alarm">Alerts</string>
     <string name="home">Home</string>
+
+    //ALERT ITEM
+    <string name="alert_end">"End:  "</string>
+    <string name="start">"Start:  "</string>
+    <string name="alert_event">Event</string>
+    <string name="exclamation_mark">exclamation mark</string>
 
 
     //CURRENT WEATHER FRAGMENT
@@ -31,10 +37,15 @@
     <string name="current_weather_detailed_loading_main">Loading</string>
     <string name="current_weather_detailed_main_image_view">picture describing weather outside</string>
     <string name="current_weather_detailed_wind_image_view">picture of wind</string>
-    <string name="current_weather_detailed_humidity_image_view">picture of hygrometr</string>
+    <string name="current_weather_detailed_humidity_image_view">picture of hygrometer</string>
     <string name="current_weather_detailed_cloud_image_view">picture of cloud</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cloudiness_current_weather">Cloudiness: </string>
+    <string name="current_fragment_precipitation">Humidity: </string>
+    <string name="current_weather_wind">Wind: </string>
+    <string name="current_weather_sunrise">Sunrise: </string>
+    <string name="current_weather_sunset">Sunset: </string>
+
+    //HOME FRAGMENT
     <string name="update_time_place_holder">Updated at %1$s</string>
 
     //UV INDEX STRINGS
@@ -43,4 +54,29 @@
     <string name= "uv_high">High</string>
     <string name= "uv_very_high">Very High</string>
     <string name= "uv_extreme">Extreme</string>
+
+
+    //DAILY WEATHER
+    <string name="picture_describing_weather_for_following_days">picture describing weather for following days</string>
+    <string name="humidity_image">humidity image</string>
+    <string name="cloud_image">cloud image</string>
+    <string name="wind_image">wind image</string>
+    <string name="arrow_down_image">arrow down image</string>
+    <string name="uv_index">UV Index</string>
+    <string name="precipitation">Precipitation</string>
+    <string name="feels_like">Feels Like</string>
+    <string name="pressure">Pressure</string>
+
+    //PREF STRING HOLDERS
+    <string name="pref_previously_started">false</string>
+
+
+    //ALERT FRAGMENT
+    <string name="currently_there_are_no_alerts_for_your_location">Currently there are no alerts for your location</string>
+    <string name="loading">Loading</string>
+    //HOURLY WEATHER ITEM
+    <string name="image_describing_weather_for_that_hour">image describing weather for that hour</string>
+    <string name="there_are_weather_alerts_for_current_location">THERE ARE WEATHER ALERTS FOR CURRENT LOCATION</string>
+
+
 </resources>

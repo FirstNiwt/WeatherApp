@@ -33,6 +33,10 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideContext(application: Application):Context = application.applicationContext
+
+    @Provides
+    @Singleton
     fun provideForecastDatabase(@ApplicationContext app: Context) = ForecastDatabase(app)
 
     @Provides
@@ -57,8 +61,8 @@ object AppModule {
     @Provides
     @Singleton
     fun provideForecastRepositoryImpl(currentWeatherDao: CurrentWeatherDao,futureWeatherDao:FutureWeatherDao,
-        weatherNetworkDataSource: WeatherNetworkDataSource,locationProvider: LocationProvider) =
-        ForecastRepositoryImpl(currentWeatherDao,futureWeatherDao, weatherNetworkDataSource,locationProvider)
+        weatherNetworkDataSource: WeatherNetworkDataSource,locationProvider: LocationProvider,@ApplicationContext app: Context) =
+        ForecastRepositoryImpl(currentWeatherDao,futureWeatherDao, weatherNetworkDataSource,locationProvider,app)
 
     @Provides
     @Singleton

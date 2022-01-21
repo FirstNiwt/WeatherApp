@@ -86,8 +86,8 @@ class HomeScreenFragment : ScopedFragment(){
 
             }
 
-            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy,  HH:mm", Locale.ENGLISH)
-            val simpleTimeFormat = SimpleDateFormat("HH:mm",Locale.ENGLISH)
+            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy,  HH:mm", Locale.getDefault())
+            val simpleTimeFormat = SimpleDateFormat("HH:mm",Locale.getDefault())
 
             val date = Date(System.currentTimeMillis() + (it.timezone - 3600) * 1000L)
             val sunset = (Date(it.sys.sunset * 1000L)).toInstant()

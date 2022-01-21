@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.data.db.entity.Alert
+import com.example.weatherapp.data.provider.LocationProvider
 import com.example.weatherapp.databinding.FragmentAlertsBinding
 import com.example.weatherapp.ui.base.ScopedFragment
 import com.example.weatherapp.ui.weather.weekly.DailyWeatherListFragment
@@ -26,6 +27,9 @@ import javax.inject.Inject
 class AlertsFragment : ScopedFragment() {
     @Inject
     lateinit var viewModelFactory: AlertsViewModelFactory
+    @Inject
+    lateinit var locationProvider: LocationProvider
+
     private lateinit var alertsAdapter: AlertsAdapter
 
 
@@ -64,6 +68,15 @@ class AlertsFragment : ScopedFragment() {
 
     }
 
+    private fun provideLanguage():Locale{
+
+        return if(locationProvider.getLanguage() == "ENGLISH")
+            Locale.ENGLISH
+        else
+            Locale.getDefault()
+
+    }
+
     private fun bindUI() = launch {
 
         var cityName = " "
@@ -90,7 +103,7 @@ class AlertsFragment : ScopedFragment() {
                 Toast.makeText(context, "Not initialized", Toast.LENGTH_SHORT).show()
                 return@Observer
             }
-            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy,  HH:mm", Locale.ENGLISH)
+            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy,  HH:mm",Locale.getDefault())
             val date = Date(System.currentTimeMillis() + (it.timezoneOffset - 3600) * 1000L)
 
             (activity as? AppCompatActivity)?.supportActionBar?.subtitle = simpleDateFormat.format(date)
@@ -103,10 +116,19 @@ class AlertsFragment : ScopedFragment() {
 
             if(alertsMutableList.size>1 || (alertsMutableList.size==1 && alertsMutableList[0].event!=""))
             {
-                binding.textViewNoAlerts.visibility = View.GONE
+
                 alertsAdapter = AlertsAdapter(alertsMutableList)
                 binding.mainRecyclerView.adapter = alertsAdapter
+
+                binding.groupLoadingAlerts.visibility = View.GONE
             }
+
+            else {
+                binding.groupLoadingAlerts.visibility = View.GONE
+                binding.textViewNoAlerts.visibility = View.VISIBLE
+
+            }
+
 
         })
 

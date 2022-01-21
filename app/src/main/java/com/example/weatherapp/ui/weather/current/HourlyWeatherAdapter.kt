@@ -55,7 +55,7 @@ class HourlyWeatherAdapter(private var hourlyWeatherList: MutableList<Hourly>,pr
 
             val isNight:Boolean = dateInstant.isAfter(sunset) || dateInstant.isBefore(sunrise)
 
-            val simpleDateFormat = SimpleDateFormat("HH:mm")
+            val simpleDateFormat = SimpleDateFormat("HH:mm",Locale.getDefault())
 
             binding.hourlyWeatherTime.text = simpleDateFormat.format(date)
 

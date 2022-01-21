@@ -15,12 +15,13 @@ import kotlin.math.abs
 
 const val USE_DEVICE_LOCATION = "USE_DEVICE_LOCATION"
 const val CUSTOM_LOCATION = "CUSTOM_LOCATION"
+const val CUSTOM_LANGUAGE = "LANGUAGE"
 
 class LocationProviderImpl (private val fusedLocationProviderClient: FusedLocationProviderClient, context: Context)
     :PreferenceProvider(context), LocationProvider {
     private val appContext = context.applicationContext
 
-    override suspend fun hasLocationChanged(lat: Double, lon: Double,cityName:String?): Boolean {
+    override suspend fun hasLocationChanged(lat: Double, lon: Double, cityName:String?, language:String?): Boolean {
         val deviceLocationChanged = try{hasDeviceLocationChanged(lat,lon)
         }catch(e: LocationPermissionNotGrantedException) {false}
 
@@ -28,9 +29,9 @@ class LocationProviderImpl (private val fusedLocationProviderClient: FusedLocati
         val preferredLocationList:List<String> = preferredLocation.split(",")
 
         return if(preferredLocationList.size == 1){
-            (deviceLocationChanged || hasCustomLocationChanged(cityName))
+            (deviceLocationChanged || hasCustomLocationChanged(cityName) || hasLanguageChanged(language))
         } else{
-            (deviceLocationChanged)
+            (deviceLocationChanged||hasLanguageChanged(language))
         }
 
     }
@@ -50,10 +51,15 @@ class LocationProviderImpl (private val fusedLocationProviderClient: FusedLocati
         return "${getCustomLocationName()}"
     }
 
+
+    override fun getLanguage(): String? {
+        return preferences.getString(CUSTOM_LANGUAGE,null)
+    }
     override fun isHomeAlert():Boolean
     {
         return preferences.getBoolean("SHOW_ALERTS",true)
     }
+
     private suspend fun hasDeviceLocationChanged(lat:Double, lon:Double):Boolean{
         if(!isUsingDeviceLocation())
             return false
@@ -67,16 +73,24 @@ class LocationProviderImpl (private val fusedLocationProviderClient: FusedLocati
                 abs(deviceLocation.longitude - lon) >comparisonThreshold
 
     }
+    private fun hasLanguageChanged(lang:String?):Boolean{
+        val customLang = getCustomLanguage()
+        return lang != customLang
+    }
 
     private fun hasCustomLocationChanged(cityName: String?):Boolean{
         val customLocation = getCustomLocationName()
         return customLocation != cityName
     }
 
+
     private fun getCustomLocationName():String?{
         return preferences.getString(CUSTOM_LOCATION,null)
     }
 
+    private fun getCustomLanguage():String?{
+        return preferences.getString(CUSTOM_LANGUAGE,null)
+    }
 
     private fun isUsingDeviceLocation():Boolean{
         return preferences.getBoolean(USE_DEVICE_LOCATION,true)

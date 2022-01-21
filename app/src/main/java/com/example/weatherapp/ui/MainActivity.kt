@@ -48,20 +48,28 @@ import kotlinx.coroutines.launch
 import org.checkerframework.checker.units.qual.m
 import javax.inject.Inject
 import android.content.Intent
-
-
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener
+import android.os.Build
+import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
+import com.example.weatherapp.data.provider.LocationProvider
+import com.example.weatherapp.ui.settings.SettingsFragment
+import java.util.*
 
 
 private const val MY_PERMISSION_ACCESS_COARSE_LOCATION = 1
 
+
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() ,SharedPreferences.OnSharedPreferenceChangeListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     @Inject
     lateinit var forecastRepository: ForecastRepository
+    @Inject
+    lateinit var locationProvider:LocationProvider
 
 
     private val locationCallback = object: LocationCallback(){
@@ -70,15 +78,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onStart() {
+        SettingsFragment().registerPref(this,this)
+        setLocaleLang()
 
-
-
-        super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setSupportActionBar(binding.topMenu)
         setContentView(binding.root)
-
 
 
 
@@ -95,6 +101,18 @@ class MainActivity : AppCompatActivity() {
 
         NavigationUI.setupActionBarWithNavController(this,navController)
 
+        super.onStart()
+    }
+
+    override fun onDestroy() {
+        SettingsFragment().unregisterPref(this,this)
+        super.onDestroy()
+    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+        firstLaunch()
+
         requestLocationPermission()
 
         if(hasLocationPermission()){
@@ -103,6 +121,7 @@ class MainActivity : AppCompatActivity() {
         else
             requestLocationPermission()
     }
+
 
 
     @SuppressLint("RestrictedApi")
@@ -175,4 +194,69 @@ class MainActivity : AppCompatActivity() {
         return ContextCompat.checkSelfPermission(this,
             Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
+    private fun firstLaunch()
+    {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(baseContext)
+
+        val previouslyStarted = prefs.getBoolean(getString(R.string.pref_previously_started), false)
+        if (!previouslyStarted) {
+            val edit = prefs.edit()
+            edit.putBoolean(getString(R.string.pref_previously_started), java.lang.Boolean.TRUE)
+            edit.commit()
+
+            val pref = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+            GlobalScope.launch(Dispatchers.IO) {
+                forecastRepository.getCurrentWeather(pref.getString("UNIT_SYSTEM", "METRIC")!!)
+                forecastRepository.getFutureWeather(pref.getString("UNIT_SYSTEM", "METRIC")!!)
+
+            }
+
+
+        }
+    }
+
+
+
+    private fun setLocaleLang() {
+
+        if (locationProvider.getLanguage() == "ENGLISH"|| locationProvider.getLanguage()==null) {
+            val config = resources.configuration
+            val lang = "en"
+            val locale = Locale(lang)
+            Locale.setDefault(locale)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                config.setLocale(locale)
+            else
+                config.locale = locale
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                createConfigurationContext(config)
+            resources.updateConfiguration(config, resources.displayMetrics)
+        }
+
+        else{
+            val config = resources.configuration
+            val lang = "pl"
+            val locale = Locale(lang)
+            Locale.setDefault(locale)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                config.setLocale(locale)
+            else
+                config.locale = locale
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                createConfigurationContext(config)
+            resources.updateConfiguration(config, resources.displayMetrics)
+        }
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+       if(key.equals("LANGUAGE")|| key.equals("CUSTOM_LOCATION")){
+           val intent = intent
+           finish()
+           startActivity(intent)
+       }
+
+    }
+
 }

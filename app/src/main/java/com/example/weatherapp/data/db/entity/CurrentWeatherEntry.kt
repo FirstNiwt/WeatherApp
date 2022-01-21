@@ -26,7 +26,8 @@ data class CurrentWeatherEntry(
     val visibility: Int,
     val weather: List<Weather>,
     @Embedded(prefix = "wind_")
-    val wind: Wind
+    val wind: Wind,
+    var languageOfResponse:String = "ENGLISH"
 ) {
 
     @PrimaryKey(autoGenerate = false)

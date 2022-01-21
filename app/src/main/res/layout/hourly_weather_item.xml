@@ -47,7 +47,8 @@
         app:layout_constraintStart_toStartOf="@+id/hourly_weather_temperature"
         app:layout_constraintTop_toBottomOf="@+id/hourly_weather_temperature"
         app:srcCompat="@drawable/ic_baseline_wb_sunny_24"
-        tools:ignore="ImageContrastCheck" />
+        tools:ignore="ImageContrastCheck"
+        android:contentDescription="@string/image_describing_weather_for_that_hour" />
 
     <TextView
         android:id="@+id/textView_humidity_hourly"

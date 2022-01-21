@@ -49,4 +49,18 @@
             android:defaultValue="false"
            />
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title = "Language">
+        <ListPreference
+            android:key="LANGUAGE"
+            android:title="Language"
+            android:summary="%s"
+            android:defaultValue="ENGLISH"
+            android:entries="@array/languageEntries"
+            android:entryValues="@array/languageValues"
+            android:negativeButtonText="CANCEL"
+            />
+    </PreferenceCategory>
+
 </PreferenceScreen>

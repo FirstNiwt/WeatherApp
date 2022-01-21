@@ -1,7 +1,10 @@
 package com.example.weatherapp.data.repository
 
+
+import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.LiveData
+import androidx.preference.PreferenceManager
 import com.example.weatherapp.data.CurrentWeatherDao
 import com.example.weatherapp.data.FutureWeatherDao
 import com.example.weatherapp.data.db.entity.CurrentWeatherEntry
@@ -19,7 +22,8 @@ class ForecastRepositoryImpl constructor(
     private val currentWeatherDao:CurrentWeatherDao,
     private val futureWeatherDao: FutureWeatherDao,
     private val weatherNetworkDataSource: WeatherNetworkDataSource,
-    private val locationProvider:LocationProvider
+    private val locationProvider:LocationProvider,
+    private val context: Context
 ) : ForecastRepository {
     init{
         weatherNetworkDataSource.apply{
@@ -50,27 +54,37 @@ class ForecastRepositoryImpl constructor(
     }
 
     private suspend fun initWeatherData(units: String) {
+
         val lastLat:Double? = currentWeatherDao.getWeatherLocationLat()
         val lastLon:Double? = currentWeatherDao.getWeatherLocationLon()
         val lastFetchSeconds:Int? = currentWeatherDao.getWeatherFetchTime()
         val cityName:String? = currentWeatherDao.getCityName()
+        val prevLanguage:String? = currentWeatherDao.getLanguage()
 
+        var languageOfCall:String? = locationProvider.getLanguage()
+        val langUpdate = languageOfCall
 
+        if(languageOfCall == null || languageOfCall == "ENGLISH")
+            languageOfCall = "en"
+        else
+            languageOfCall = "pl"
+
+        if((lastLat == null || lastLon == null)
+            || locationProvider.hasLocationChanged(lastLat,lastLon,cityName,prevLanguage)
+            )
+        {
+            fetchFutureWeather(units,languageOfCall)
+
+        }
 
         val i = lastFetchSeconds?.let { Instant.ofEpochSecond(it.toLong()) }
         val lastFetchTime = ZonedDateTime.ofInstant(i,ZoneOffset.UTC)
 
-        if((lastLat == null || lastLon == null)
-            || locationProvider.hasLocationChanged(lastLat,lastLon,cityName)
-                )
-        {
-            fetchFutureWeather(units)
-            return
-        }
-
         if(isFetchNeeded(lastFetchTime))
-            fetchFutureWeather(units)
+            fetchFutureWeather(units,languageOfCall)
 
+
+        currentWeatherDao.updateLang(langUpdate)
     }
 
     private fun isFetchNeeded(lastFetchTime:ZonedDateTime):Boolean{
@@ -80,34 +94,42 @@ class ForecastRepositoryImpl constructor(
 
     }
 
-    private suspend fun fetchCurrentWeather(units: String, city:String){
+    private suspend fun fetchCurrentWeather(units: String, city:String,lang:String){
 
-            weatherNetworkDataSource.fetchCurrentDataByLocation(city,units,"en")
+            weatherNetworkDataSource.fetchCurrentDataByLocation(city,units,lang)
 
     }
 
-    private suspend fun fetchFutureWeather(units: String){
+    private suspend fun fetchFutureWeather(units: String,lang:String){
         val preferredString:String = locationProvider.getPreferredLocation()
         val preferredLocation:List<String> = preferredString.split(",")
 
         if(preferredLocation.size == 2) //That means that we are using device location cuz we are using lat and lon
         {
             weatherNetworkDataSource.fetchFutureDataByCoordinates(preferredLocation[0].toDouble(),
-                preferredLocation[1].toDouble(),"minutely",units,"en")
+                preferredLocation[1].toDouble(),"minutely",units,lang)
 
             weatherNetworkDataSource.fetchCurrentDataByCoordinates(preferredLocation[0].toDouble(),
-                preferredLocation[1].toDouble(),units,"en")
+                preferredLocation[1].toDouble(),units,lang
+            )
 
         }
 
         else{  //Means we are using location set up in app settings
-            fetchCurrentWeather(units,preferredLocation[0])
+            fetchCurrentWeather(units,preferredLocation[0],lang)
 
             delay(500L)
             weatherNetworkDataSource.fetchFutureDataByCoordinates(currentWeatherDao.getWeatherLocationLat(),
-                currentWeatherDao.getWeatherLocationLon(),"minutely",units,"en")
+                currentWeatherDao.getWeatherLocationLon(),"minutely",units,lang)
+
+
 
         }
+
+        val pref = PreferenceManager.getDefaultSharedPreferences(context)
+        val editor = pref.edit()
+        editor.putString("CUSTOM_LOCATION", currentWeatherDao.getCityName())
+        editor.apply()
 
 
     }

@@ -11,14 +11,49 @@
         android:id="@+id/textView_no_alerts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Currently there are no alerts for your location"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_vertical"
+        android:text="@string/currently_there_are_no_alerts_for_your_location"
+        android:textAlignment="center"
         android:textColor="@color/font_color"
+        android:visibility="invisible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <ProgressBar
+        android:id="@+id/progressBar_alerts"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="107dp"
+        android:layout_height="83dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+
+        android:id="@+id/textView_loading_alerts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading"
+        android:textColor="@color/font_color"
+        app:layout_constraintEnd_toEndOf="@+id/progressBar_alerts"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/progressBar_alerts"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar_alerts" />
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_loading_alerts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="textView_loading_alerts,progressBar_alerts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginEnd="8dp"
+        />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recyclerView"
@@ -32,7 +67,6 @@
         android:padding="16dp">
 
     </androidx.recyclerview.widget.RecyclerView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

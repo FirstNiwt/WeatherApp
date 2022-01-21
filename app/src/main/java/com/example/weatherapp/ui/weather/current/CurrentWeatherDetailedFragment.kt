@@ -79,8 +79,8 @@ class CurrentWeatherDetailedFragment : ScopedFragment() {
             val isNight:Boolean = dateInstant.isAfter(sunset) || dateInstant.isBefore(sunrise)
 
 
-            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy,  HH:mm", Locale.ENGLISH)
-            val simpleTimeFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
+            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy,  HH:mm", Locale.getDefault())
+            val simpleTimeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
             val sunsetTime = simpleTimeFormat.format(sunsetDate)
             val sunriseTime = simpleTimeFormat.format(sunriseDate)

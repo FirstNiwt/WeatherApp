@@ -1,0 +1,81 @@
+<resources>
+
+    //ACTIVITY MAIN
+    <string name="app_title">Aplikacja Pogodowa</string>
+    <string name = "app_name">Aplikacja Pogodowa </string>
+    //TOP APP BAR
+    <string name="auto_localisation_desc">Automatyczna lokalizacja</string>
+    <string name="localisation">Lokalizacja</string>
+
+    //BOTTOM NAVIGATION
+    <string name="today">Dziś</string>
+    <string name="week">Tydzień</string>
+    <string name="notification">Powiadomienia</string>
+    <string name="settings">Ustawienia</string>
+    <string name="alarm">Alerty</string>
+    <string name="home">Dom</string>
+
+    //ALERT ITEM
+    <string name="alert_end">"Koniec:  "</string>
+    <string name="start">"Start:  "</string>
+    <string name="alert_event">Wydarzenie</string>
+    <string name="exclamation_mark">Wykrzyknik</string>
+
+
+    //CURRENT WEATHER FRAGMENT
+    <string name="humidity_place_holder">%1$d\%%</string>
+    <string name="cloudiness_place_holder">%1$d%%</string>
+    <string name="temperature_place_holder">%1$d°</string>
+    <string name="wind_speed_place_holder_metric">%1$d km/h</string>
+    <string name="pressure_place_holder">%1$d mb</string>
+    <string name= "precipitation_place_holder">%1$s mm</string>
+    <string name="wind_speed_place_holder_imperial">%1$d mi/h</string>
+
+    <string name="current_weather_item_description">opis obecnej pogody</string>
+    <string name="hourly_loading_text">Ładowanie</string>
+    <string name="hourly_forecast_title">Prognoza Godzinowa</string>
+    <string name="current_weather_detailed_loading_main">Ładowanie</string>
+    <string name="current_weather_detailed_main_image_view">obraz opisujący pogodę na zwenątrz</string>
+    <string name="current_weather_detailed_wind_image_view">obraz wiatru</string>
+    <string name="current_weather_detailed_humidity_image_view">obraz hygrometru</string>
+    <string name="current_weather_detailed_cloud_image_view">obraz chmur</string>
+    <string name="cloudiness_current_weather">Zachmurzenie: </string>
+    <string name="current_fragment_precipitation">Wilgotność: </string>
+    <string name="current_weather_wind">Wiatr: </string>
+    <string name="current_weather_sunrise">Wschód Słońca: </string>
+    <string name="current_weather_sunset">Zachód Słońca: </string>
+
+    //HOME FRAGMENT
+    <string name="update_time_place_holder">Zaaktualizowano o %1$s</string>
+
+    //UV INDEX STRINGS
+    <string name= "uv_low">Niski</string>
+    <string name= "uv_moderate">Umiarkowany</string>
+    <string name= "uv_high">Wysoki</string>
+    <string name= "uv_very_high">Bardzo Wysoki</string>
+    <string name= "uv_extreme">Ekstremalny</string>
+
+
+    //DAILY WEATHER
+    <string name="picture_describing_weather_for_following_days">obraz opisujący pogodę na zwenątrz w kolejnych dniach</string>
+    <string name="humidity_image">obraz wilgotność</string>
+    <string name="cloud_image">obraz chmury</string>
+    <string name="wind_image">obraz wiatru</string>
+    <string name="arrow_down_image">obraz strzałka skierowana w dół</string>
+    <string name="uv_index">Indeks UV</string>
+    <string name="precipitation">Opady</string>
+    <string name="feels_like">Odczuwalna</string>
+    <string name="pressure">Ciśnienie</string>
+
+    //PREF STRING HOLDERS
+    <string name="pref_previously_started">false</string>
+
+
+    //ALERT FRAGMENT
+    <string name="currently_there_are_no_alerts_for_your_location">Aktualnie nie ma alertów pogodowych dla wybranej lokalizacji</string>
+    <string name="loading">Ładowanie</string>
+    <string name="there_are_weather_alerts_for_current_location">UWAGA OSTRZEŻENIA POGODOWE DLA OBECNEJ LOKALIZACJI</string>
+    //HOURLY WEATHER ITEM
+    <string name="image_describing_weather_for_that_hour">obraz opisujący pogodę dla danej godziny</string>
+
+</resources>

@@ -1,10 +1,7 @@
 package com.example.weatherapp.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.weatherapp.data.db.entity.CURRENT_WEATHER_ID
 import com.example.weatherapp.data.db.entity.CurrentWeatherEntry
 
@@ -28,5 +25,14 @@ interface CurrentWeatherDao {
 
     @Query("select name from current_weather where keyId = $CURRENT_WEATHER_ID")
     fun getCityName():String?
+
+    @Query("select languageOfResponse from current_weather where keyId = $CURRENT_WEATHER_ID")
+    fun getLanguage():String?
+
+    @Query("update current_weather set languageOfResponse=:language where keyId = $CURRENT_WEATHER_ID")
+    fun updateLang(language:String?)
+
+    @Query("update current_weather set name=:cityName where keyId= $CURRENT_WEATHER_ID")
+    fun updateCityName(cityName:String?)
 
 }

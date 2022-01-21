@@ -90,7 +90,7 @@ class DailyWeatherListFragment : ScopedFragment() {
             }
 
 
-            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy,  HH:mm", Locale.ENGLISH)
+            val simpleDateFormat = SimpleDateFormat("EEE, dd MMM yyyy,  HH:mm", Locale.getDefault())
             val date = Date(System.currentTimeMillis() + (it.timezoneOffset - 3600) * 1000L)
 
             (activity as? AppCompatActivity)?.supportActionBar?.subtitle = simpleDateFormat.format(date)

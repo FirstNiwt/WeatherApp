@@ -77,7 +77,7 @@ class AlertsAdapter(private var alertsList: MutableList<Alert>): RecyclerView.Ad
 
         private fun bindStartAndEndDate(start:Int,end:Int)
         {
-            val simpleDateFormat = SimpleDateFormat("EEE, HH:mm",Locale.ENGLISH)
+            val simpleDateFormat = SimpleDateFormat("EEE, HH:mm",Locale.getDefault())
 
             val timeStart = Date(start*1000L)
             val timeEnd = Date(end*1000L)

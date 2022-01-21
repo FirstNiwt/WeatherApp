@@ -128,7 +128,7 @@ class DailyListWeatherAdapter(private var dailyWeatherList: MutableList<Daily>):
             }
         }
         private fun setDate(date:Date){
-            val simpleDateFormat = SimpleDateFormat("EEE, d MMM",Locale.ENGLISH)
+            val simpleDateFormat = SimpleDateFormat("EEE, d MMM",Locale.getDefault())
             binding.weeklyWeatherDate.text = simpleDateFormat.format(date)
         }
         private fun setTemperature(temp: Double){

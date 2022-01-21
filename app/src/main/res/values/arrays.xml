@@ -9,4 +9,14 @@
         <item>Metric</item>
         <item>Imperial</item>
     </string-array>
+
+    <string-array name="languageEntries">
+        <item>Polish</item>
+        <item>English</item>
+    </string-array>
+
+    <string-array name="languageValues">
+        <item>POLISH</item>
+        <item>ENGLISH</item>
+    </string-array>
 </resources>
