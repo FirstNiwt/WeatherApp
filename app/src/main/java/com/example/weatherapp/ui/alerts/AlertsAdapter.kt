@@ -1,12 +1,9 @@
 package com.example.weatherapp.ui.alerts
 
-import android.telecom.Call
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherapp.R
 import com.example.weatherapp.data.db.entity.Alert
 import com.example.weatherapp.data.provider.UnitProviderImpl
 import com.example.weatherapp.databinding.AlertItemBinding

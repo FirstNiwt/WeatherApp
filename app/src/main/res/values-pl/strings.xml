@@ -78,4 +78,5 @@
     //HOURLY WEATHER ITEM
     <string name="image_describing_weather_for_that_hour">obraz opisujący pogodę dla danej godziny</string>
 
+    <string name="Location_updated">Zaktualizowano lokalizację</string>
 </resources>

@@ -2,11 +2,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="Weather Location">
+        android:title="Lokalizacja Prognozy">
         <SwitchPreference
             android:key="USE_DEVICE_LOCATION"
-            android:title="Use device location"
-            android:summary="Allow the app to get current location"
+            android:title="Automatyczna lokalizacja"
+            android:summary="Zezwól na dostęp do aktualnej lokalizacji"
             android:defaultValue="true"
             android:disableDependentsState="true"/>
 
@@ -14,9 +14,9 @@
             android:defaultValue="Warsaw"
             android:dependency="USE_DEVICE_LOCATION"
             android:key="CUSTOM_LOCATION"
-            android:summary="Select custom location"
-            android:title="Location"
-            android:negativeButtonText="Cancel"
+            android:summary="Wybierz lokalizację"
+            android:title="Lokalizacja"
+            android:negativeButtonText="Anuluj"
             android:positiveButtonText="Ok"
 
 
@@ -30,36 +30,36 @@
         android:title="Units">
         <ListPreference
             android:key="UNIT_SYSTEM"
-            android:title="Unit system"
+            android:title="System metryczny"
             android:summary="%s"
             android:defaultValue="METRIC"
             android:entries="@array/unitSystemEntries"
             android:entryValues="@array/unitSystemValues"
-            android:negativeButtonText="CANCEL"
+            android:negativeButtonText="Anuluj"
             />
-   </PreferenceCategory>
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:title="Alerts">
 
         <SwitchPreference
             android:key="SHOW_ALERTS"
-            android:title="Show weather alerts"
-            android:summary="Enable to add alerts to the Home screen"
+            android:title="Pokazuj alerty pogodowe"
+            android:summary="Dodaj alerty na ekran główny aplikacji"
             android:defaultValue="false"
-           />
+            />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title = "Language">
+        android:title = "Język">
         <ListPreference
             android:key="LANGUAGE"
-            android:title="App language"
+            android:title="Język aplikacji"
             android:summary="%s"
             android:defaultValue="ENGLISH"
             android:entries="@array/languageEntries"
             android:entryValues="@array/languageValues"
-            android:negativeButtonText="CANCEL"
+            android:negativeButtonText="ANULUJ"
             />
     </PreferenceCategory>
 

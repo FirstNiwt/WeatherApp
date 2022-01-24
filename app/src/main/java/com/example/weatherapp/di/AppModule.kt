@@ -12,7 +12,6 @@ import com.example.weatherapp.data.provider.UnitProvider
 import com.example.weatherapp.data.provider.UnitProviderImpl
 import com.example.weatherapp.data.repository.ForecastRepository
 import com.example.weatherapp.data.repository.ForecastRepositoryImpl
-import com.example.weatherapp.ui.alerts.AlertsViewModel
 import com.example.weatherapp.ui.alerts.AlertsViewModelFactory
 import com.example.weatherapp.ui.home.HomeScreenViewModelFactory
 import com.example.weatherapp.ui.weather.current.CurrentWeatherViewModelFactory

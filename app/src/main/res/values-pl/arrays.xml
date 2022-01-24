@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="unitSystemValues">
+        <item>METRIC</item>
+        <item>IMPERIAL</item>
+    </string-array>
+
+    <string-array name="unitSystemEntries">
+        <item>Metryczny</item>
+        <item>Imperialny</item>
+    </string-array>
+
+    <string-array name="languageEntries">
+        <item>Polski</item>
+        <item>Angielski</item>
+    </string-array>
+
+    <string-array name="languageValues">
+        <item>POLISH</item>
+        <item>ENGLISH</item>
+    </string-array>
+</resources>

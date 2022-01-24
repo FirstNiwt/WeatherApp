@@ -15,7 +15,11 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.weatherapp.ui.settings.SettingsFragment"
-         />
+         >
+        <action
+            android:id="@+id/action_settingsFragment_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/alertsFragment"
         android:name="com.example.weatherapp.ui.alerts.AlertsFragment"

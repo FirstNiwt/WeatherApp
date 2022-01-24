@@ -9,15 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.data.db.entity.Daily
 import com.example.weatherapp.databinding.FragmentDailyWeatherListBinding
 import com.example.weatherapp.ui.base.ScopedFragment
-import com.xwray.groupie.GroupAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -35,9 +30,6 @@ class DailyWeatherListFragment : ScopedFragment() {
     private var linearLayoutManager = LinearLayoutManager(this@DailyWeatherListFragment.context,
         LinearLayoutManager.VERTICAL,false)
 
-    companion object{
-        fun newInstance() = DailyWeatherListFragment()
-    }
 
     private lateinit var viewModel: DailyWeatherListViewModel
 

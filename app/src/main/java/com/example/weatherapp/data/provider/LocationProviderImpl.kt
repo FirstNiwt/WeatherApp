@@ -10,7 +10,6 @@ import com.example.weatherapp.internal.LocationPermissionNotGrantedException
 import com.example.weatherapp.internal.asDeferred
 import com.google.android.gms.location.FusedLocationProviderClient
 import kotlinx.coroutines.Deferred
-import javax.inject.Inject
 import kotlin.math.abs
 
 const val USE_DEVICE_LOCATION = "USE_DEVICE_LOCATION"

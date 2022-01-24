@@ -96,14 +96,6 @@ dependencies {
     //dateTime
     implementation ("com.jakewharton.threetenabp:threetenabp:1.1.0")
 
-    // Glide
-    implementation ("com.github.bumptech.glide:glide:4.8.0")
-    kapt ("com.github.bumptech.glide:compiler:4.8.0")
-
-    //RecyclerView (Groupie)
-    implementation ("com.github.lisawray.groupie:groupie:$groupie_version")
-    implementation ("com.github.lisawray.groupie:groupie-viewbinding:$groupie_version")
-    implementation ("com.github.lisawray.groupie:groupie-databinding:$groupie_version")
 
     // Preference
     implementation ("androidx.preference:preference-ktx:1.1.1")

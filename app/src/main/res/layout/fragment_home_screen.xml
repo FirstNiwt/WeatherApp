@@ -98,7 +98,7 @@
             android:layout_marginStart="16dp"
             android:fontFamily="@font/roboto"
             android:textColor="@color/font_color"
-            android:textSize="72sp"
+            android:textSize="66sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView_home_temp_max"
             tools:text="-3°" />

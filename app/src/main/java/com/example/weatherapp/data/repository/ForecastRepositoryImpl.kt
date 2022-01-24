@@ -2,7 +2,6 @@ package com.example.weatherapp.data.repository
 
 
 import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.preference.PreferenceManager
 import com.example.weatherapp.data.CurrentWeatherDao
@@ -61,33 +60,39 @@ class ForecastRepositoryImpl constructor(
         val cityName:String? = currentWeatherDao.getCityName()
         val prevLanguage:String? = currentWeatherDao.getLanguage()
 
-        var languageOfCall:String? = locationProvider.getLanguage()
-        val langUpdate = languageOfCall
+        val languageOfCall:String? = locationProvider.getLanguage()
 
-        if(languageOfCall == null || languageOfCall == "ENGLISH")
-            languageOfCall = "en"
-        else
-            languageOfCall = "pl"
+        val langOfCall = getLanguageOfCall(languageOfCall)
 
         if((lastLat == null || lastLon == null)
             || locationProvider.hasLocationChanged(lastLat,lastLon,cityName,prevLanguage)
             )
         {
-            fetchFutureWeather(units,languageOfCall)
+            fetchFutureWeather(units,langOfCall)
 
         }
 
         val i = lastFetchSeconds?.let { Instant.ofEpochSecond(it.toLong()) }
         val lastFetchTime = ZonedDateTime.ofInstant(i,ZoneOffset.UTC)
 
-        if(isFetchNeeded(lastFetchTime))
-            fetchFutureWeather(units,languageOfCall)
+        if(isFetchNeededTime(lastFetchTime))
+            fetchFutureWeather(units,langOfCall)
 
-
-        currentWeatherDao.updateLang(langUpdate)
+        currentWeatherDao.updateLang(languageOfCall)
     }
 
-    private fun isFetchNeeded(lastFetchTime:ZonedDateTime):Boolean{
+
+    private fun getLanguageOfCall(lang:String?):String
+    {
+
+        if( lang == "ENGLISH" || lang ==null)
+            return "en"
+        else
+            return  "pl"
+
+    }
+
+    private fun isFetchNeededTime(lastFetchTime:ZonedDateTime):Boolean{
 
         val fifteenMinutesAgo = Instant.now().minusSeconds(900)
         return lastFetchTime.isBefore(ZonedDateTime.ofInstant(fifteenMinutesAgo,ZoneOffset.UTC))

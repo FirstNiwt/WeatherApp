@@ -78,5 +78,6 @@
     <string name="image_describing_weather_for_that_hour">image describing weather for that hour</string>
     <string name="there_are_weather_alerts_for_current_location">THERE ARE WEATHER ALERTS FOR CURRENT LOCATION</string>
 
+    <string name="Location_updated">Location updated</string>
 
 </resources>

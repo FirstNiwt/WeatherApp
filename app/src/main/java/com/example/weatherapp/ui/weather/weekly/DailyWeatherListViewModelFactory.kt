@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.data.provider.UnitProvider
 import com.example.weatherapp.data.repository.ForecastRepository
-import com.example.weatherapp.ui.weather.current.CurrentWeatherDetailedViewModel
 
 
 class DailyWeatherListViewModelFactory constructor(private val forecastRepository: ForecastRepository, private val unitProvider: UnitProvider):

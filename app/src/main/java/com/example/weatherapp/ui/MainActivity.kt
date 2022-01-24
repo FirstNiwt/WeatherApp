@@ -1,30 +1,17 @@
 package com.example.weatherapp.ui
 
 import android.Manifest
-import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-
-import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.ui.home.HomeScreenFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Exception
-import java.lang.RuntimeException
-import java.lang.reflect.Method
-import android.R.menu
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.content.res.Resources
-import android.os.Handler
-import android.util.AttributeSet
 import android.view.*
 import android.widget.Toast
 
@@ -33,28 +20,23 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.preference.PreferenceManager
-import com.bumptech.glide.load.engine.Resource
 import com.example.weatherapp.R
-import com.example.weatherapp.data.network.WeatherNetworkDataSource
 import com.example.weatherapp.data.repository.ForecastRepository
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.checkerframework.checker.units.qual.m
 import javax.inject.Inject
-import android.content.Intent
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Build
-import android.view.inputmethod.InputMethodManager
-import androidx.fragment.app.Fragment
 import com.example.weatherapp.data.provider.LocationProvider
 import com.example.weatherapp.ui.settings.SettingsFragment
 import java.util.*
+
+
+
 
 
 private const val MY_PERMISSION_ACCESS_COARSE_LOCATION = 1
@@ -104,6 +86,8 @@ class MainActivity : AppCompatActivity() ,SharedPreferences.OnSharedPreferenceCh
         super.onStart()
     }
 
+
+
     override fun onDestroy() {
         SettingsFragment().unregisterPref(this,this)
         super.onDestroy()
@@ -111,7 +95,6 @@ class MainActivity : AppCompatActivity() ,SharedPreferences.OnSharedPreferenceCh
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        firstLaunch()
 
         requestLocationPermission()
 
@@ -145,7 +128,6 @@ class MainActivity : AppCompatActivity() ,SharedPreferences.OnSharedPreferenceCh
 
             R.id.auto_localisation -> {
                 val pref = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-                Toast.makeText(applicationContext, "Location Updated", Toast.LENGTH_LONG).show()
                 val editor = pref.edit()
                 editor.putBoolean("USE_DEVICE_LOCATION", true)
                 editor.putString("CUSTOM_LOCATION", "New York")
@@ -159,7 +141,6 @@ class MainActivity : AppCompatActivity() ,SharedPreferences.OnSharedPreferenceCh
                 val intent = intent
                 finish()
                 startActivity(intent)
-
             }
         }
             return super.onOptionsItemSelected(item)
